@@ -1,0 +1,569 @@
+% LaTeX template for diploma, bachelor, and master theses
+% This template serves as starting point to quickly get good
+% results when documenting the work performed.
+% A student can take a copy of this template and write his/her
+% thesis with it.
+% A few hints can be found in the following.
+%
+% Necessary changes in this document:
+% * do not change anything before the "\begin{document}" command,
+%   except the following stuff
+%   - choose your type of thesis
+%   - choose your programm of study
+%   - enter the name of the thesis
+%   - enter the name of the cooperating company
+%   - enter the advisor's name
+%   - enter name and address of the cooperating company
+%   - enter the start date of your work
+%   - enter the end date of your work
+%   - enter your matriculation number
+%   - enter your salutatory address
+%   - enter your name
+%   - enter 5-7 keywords for your work/area of work
+% * in the title page section
+%   - substitute "dummy" with the cooperating company logo
+%   - enter your date of birth
+%   - enter your address, email and phone
+%
+% Document generation:
+% * target file type is PDF
+% * PDF generation by "pdflatex <dateiname.tex>" on a command shell
+%
+% Bibliography generation:
+% * create a bibiliography database <dateiname.bib> according to
+%   "literatur.bib" manually or by using Citavi or JabRef
+% * enter <dateiname.bib> in the "bibilography" commmand at the
+%   bottom of this document
+% * after having parsed this tex file by pdflatex gernerate the
+%   bibiliography by "bibtex <dateiname.tex>
+% * to include the bibliography in the main document, parse it
+%   again with pdflatex
+%
+% Inclusion of pixel or vector graphics:
+% * all graphics have to be in PDF or JPEG format
+% * all graphics have to have a bounding box giving the size
+%   of the graphics
+% * to produce such a bounding box you can
+%   - draw a box, mark it and apply
+%     "Objekt"->"Schnittbereich"->"Erstellen"
+%     in Adobe Illustrator CS2 or
+%   - generate the pdf via "epstopfd <dateiname.eps> from a
+%     EPS graphics.
+%   - use graphics tools which automatically produce bounding boxes
+% Author: Prof. Thomas Schlegl
+% generated: August 10th, 2007
+%--------------------------------
+% The following passage defines several parameters of the document and used TeX-packages: 
+% double sided document
+%\documentclass[12pt,paper=a4,fleqn,headsepline,headings=normal,cleardoublepage=current,titlepage,twoside,bibliography=totoc,listof=totoc,numbers=noenddot,parskip=half]{scrbook}  
+% single sided document
+\documentclass[12pt,paper=a4,fleqn,oneside,headsepline,headings=normal,bibliography=totoc,listof=totoc,parskip=half]{scrreprt} 
+
+% -----------------------------------
+% --- Usepackages -------------------
+% ---             -------------------
+\usepackage[ngerman]{babel} % german hyphenation
+\usepackage{latexsym,amsfonts,amssymb,amsmath,ngerman}
+\usepackage{longtable}
+\usepackage{movie15}
+\usepackage{bibgerm} % for german bibliography standards
+\usepackage[pdftex]{graphicx} % graphic package of tex
+\usepackage[latin1]{inputenc} % implementation of german umlaute
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url} 
+\usepackage{array}
+\usepackage{units}
+\usepackage[format=hang]{caption}
+\usepackage{pdfpages}
+%\usepackage{morefloats} % increases the limit of unprocessed floats (18)
+\usepackage{wrapfig} % picture surrounded with text
+\usepackage{here} % disables a flow of pictures and can be used with [H]
+\usepackage[numbers]{natbib}
+\usepackage{scrhack}
+\usepackage{tikz}
+\usepackage{leftidx}
+\usepackage{epstopdf}
+\usepackage{breqn}
+\setkeys{breqn}{breakdepth={4}}
+\usepackage{pdflscape}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{3d,arrows}
+\usepackage{placeins}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[colorinlistoftodos,prependcaption,textsize=small]{todonotes}
+\usepackage[
+%plainpages=false,
+%pdfpagelabels,
+pdftex,
+colorlinks=false,
+linkcolor=blue,
+citecolor=black,
+filecolor = black,
+urlcolor = blue,
+bookmarks=true,
+bookmarksopen=true,
+bookmarksopenlevel=2,
+pagebackref=false,
+bookmarksnumbered=true,
+pdfstartpage=1,
+pdfstartview=FitH,
+plainpages=false,
+pdfpagemode=UseOutlines,
+]{hyperref}
+
+
+
+% for one-sided view in PDF-Reader
+\hypersetup{pdfpagelayout=SinglePage,pdfstartview=Fit} 
+% for book-like two-sided view in PDF-Reader
+%\hypersetup{pdfpagelayout=TwoPageRight} 
+\pdfminorversion=6
+% ATTENTION: cite-package leads to non-linked bibliography entries!!
+
+% -----------------------------------
+% --- Preparation -------------------
+% ---             -------------------
+
+% Layout:
+\textwidth				161mm
+\textheight 			245mm
+\oddsidemargin  		4mm
+\evensidemargin 	 -6mm
+\topmargin      	-12mm
+%\headheight        0cm
+\headsep    			 10mm
+\topskip    				0mm
+\voffset    				0mm
+\hoffset    				0mm
+\footskip   			7.5mm
+\raggedbottom
+\renewcommand{\topfraction}{1.0}
+\parskip        		3mm
+%\setlength{\itemsep}{5mm}
+\frenchspacing
+\parindent					0cm
+% longtables are set flush left
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
+
+% Commands for figures:
+%\DeclareGraphicsExtensions{.eps,.ai} % file extension of postscript-pictures for the generation of PS-documents
+\DeclareGraphicsExtensions{.pdf,.jpg} % file extension of postscript-pictures for the generation of PDF-documents
+\graphicspath{{01_figs/}} % path of the picture files
+\def\figurename{Abbildung } % keyword for the captions
+
+% Definition of the thesis type, degree, and cooperating company:
+%
+% Choose ONE of the following three type of thesis:
+\newcommand{\graduation}{Bachelor} \newcommand{\abbretyp}{B}
+%\newcommand{\graduation}{Diplom} \newcommand{\abbretyp}{D}
+%\newcommand{\graduation}{Master} \newcommand{\abbretyp}{M}
+%
+% Choose ONE of the following programms:
+%\newcommand{\studies}{Produktions- und Automatisierungstechnik}
+\newcommand{\studies}{Maschinenbau} \newcommand{\abbrestud}{MB}
+%\newcommand{\studies}{Industrial Engineering} \newcommand{\abbrestud}{IE}
+%\newcommand{\studies}{Mechatronik} \newcommand{\abbrestud}{ME}
+%
+% Enter the name of the thesis:
+\newcommand{\doctitle}{Aktive Lageregelung mittels Schubvektorsteuerung}
+\newcommand{\bearbeitername}{Thomas Schmid, Oliver Arend}
+
+
+
+
+% Additional settings for PDF-document:
+
+\hypersetup{
+pdftitle=\doctitle,
+pdfauthor=\bearbeitername
+% Enter 5-7 keyword for your work/area of work:
+pdfkeywords={Konstruktion, Entwicklung, Simulation, Roboter}
+}
+
+
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\mat}[1]{\underline{#1}}
+\renewcommand{\phi}{\varphi}
+% -----------------------------------
+% --- Main Document -----------------
+% ---               -----------------
+\begin{document}
+\listoftodos
+\cleardoubleemptypage
+% --- Title Page --------------------
+\pagenumbering{roman}
+\thispagestyle{empty}
+\hypertarget{titelseite}{}
+\pdfbookmark[0]{Titelseite}{titelseite}
+\includegraphics*[angle=0, height = 2.5cm]{solaris.pdf} \hfill
+\includegraphics*[angle=0, height = 2.5cm]{sofex.pdf}
+\vspace*{1cm}
+\vfill
+
+{
+\sf\huge
+\begin{center}
+\textbf{\doctitle}
+\end{center}
+\vfill
+\large
+\begin{center}
+	 Solaris-Forum für Experimentalraketen\\
+	 20.02 - 21.02.2016
+\end{center}
+\vfill
+\begin{center}
+	Herrn Schmid Thomas\\
+	Herrn Oliver Arend
+\end{center}
+\vfill
+\begin{center}
+	E-Mail: \href{mailto:thomas.schmid11@web.de}{thomas.schmid111@web.de}\\
+	E-Mail: \href{mailto:oliver.arend@gmail.de}{oliver.arend@gmail.de}
+\end{center}
+\vfill
+\begin{center}
+	\begin{tabular}{ll}
+		Datum: 20.02.2016\\
+		Kooperation: Solaris-RMB e.V.
+	\end{tabular}
+\end{center}
+\vfill
+}
+\cleardoubleemptypage
+
+
+% -----------------------------------
+% --- Abstract ----------------------
+% ---          ----------------------
+
+\chapter*{Zusammenfassung - Abstract}
+
+\vfill
+\cleardoubleemptypage
+
+
+% -----------------------------------
+% --- directories -------------------
+% ---             -------------------
+\setcounter{tocdepth}{2}
+\hypertarget{inhalt}{}%
+\pdfbookmark[0]{\contentsname}{inhalt}%
+\tableofcontents % a table of contents is created
+\listoffigures % a list of all figures is created
+\listoftables % a list of all tables is created
+
+
+\chapter{Einführung}
+\pagenumbering{arabic}
+\chapter{Aufbau}
+	\section{Schubvektorsteuerung}
+	Eine Schubvektorsteuerung lässt sich durch verschiedene Konzepte realisieren. Im großen und Ganzen kann man den Schubvektor steuern durch \ldots
+	\begin{itemize}
+		\item 	veränderliche Düsenkontur (vor allem Verwendung bei Strahltriebwerken)
+		\item	kardanische Aufhängung des gesamten Antriebs
+		\item   Strahlruder im Abstrom des Antriebs
+	\end{itemize}
+		\subsection{Kinematik}
+		\todo[inline]{Mit der aktuellen Geometrie von Oliver abgleichen}
+			Eine kardanische Aufhängung lässt sich durch zwei konzentrisch gelagerte Ringe realisieren.
+			\begin{figure}
+				{
+				\centering
+				\subcaptionbox{Gimbal \label{fig:gimbal}}
+					{
+					\tdplotsetmaincoords{60}{155}
+					\begin{tikzpicture}[tdplot_main_coords]
+					%				\draw[->,black] (0,0) -- (1,0,0) node[below left]{$I_x$};
+					%				\draw[->,black] (0,0) -- (0,1,0) node[ right]{$I_y$};
+					%				\draw[->,black] (0,0) -- (0,0,1) node[ left]{$I_z$};
+					%				\draw[dashdotted, thin] (0,0,0) -- (0,2,0);
+					\draw[dashed,thin] (0,-4,0) -- (0,4,0);
+					\draw[dashed,thin] (-4,0,0) -- (4,0,0);
+					\draw[thick,->] (0,0,0) -- (0,0,4) node[anchor = south]{$z_{G}$};
+					\draw[thick,->] (0,0,0) -- (0,5,0) node[anchor = north west]{$y_{G}$};
+					\draw[thick,->] (0,0,0) -- (4,0,0) node[anchor = north east]{$x_{G,G'}$};
+					\draw[thin,dotted] (0,0,0)  circle(3);
+					\tdplotsetrotatedcoords{90}{20}{-90}
+					\begin{scope}[tdplot_rotated_coords,draw=blue]
+					\draw[thick] (0,0,0) circle(3);
+					\draw[ very thick] (3,0,0) -- (3.5,0,0) (-3,0,0) -- (-3.5,0,0);
+					\draw[ thin, dotted] (3,0,0) -- (-3,0,0);
+					\draw[draw = red, very thick] (0,3,0) -- (0,2,0) (0,-3,0) -- (0,-2,0);
+					\fill[fill=blue] ({-cos(60)*3},{-sin(60)*3},0) circle(0.08) node[above]{$ O $};
+					\draw[->,>=stealth,draw=black,very thick] (0,0,0) -- ({-cos(60)*3},{-sin(60)*3},0) node[midway, right]{$\vec{c}_{1}$};
+					\end{scope}
+					\tdplotsetrotatedcoords{43.2192}{27.9909}{-46.7808}
+					\begin{scope}[tdplot_rotated_coords,draw=red]
+					\draw[dashed,thin] (0,-4,0) -- (0,4,0);
+					\draw[dashed,thin] (-4,0,0) -- (2,0,0);
+					\draw[thick] (0,0,0) circle(2);
+					\fill[fill=red] ({-cos(-10)*2},{-sin(-10)*2},0) circle(0.08) node[below right]{$ I $};
+					\draw[->,>=stealth,draw=black,very thick] (0,0,0) -- ({-cos(-10)*2},{-sin(-10)*2},0) node[midway, below]{$\vec{c}_{2}$};
+					\end{scope}
+					\tdplotsetthetaplanecoords{90}
+					\draw[draw = black,<-,tdplot_rotated_coords,thick] (0,3,0) arc(90:110:3) node[anchor = south west]{$\alpha$};
+					\draw[|->,tdplot_rotated_coords,thin] (-0.25,0,-3.5) arc(180:-90:0.25);
+					\tdplotsetrotatedcoords{90}{20}{-90}
+					\tdplotsetrotatedthetaplanecoords{180}
+					\draw[draw = black,->,tdplot_rotated_coords,thick] (0,3,0) arc(90:70:3) node[anchor = north west]{$\beta$};
+					\draw[|->,tdplot_rotated_coords,thin] (-0.25,0,3.5) arc(180:-90:0.25);
+					\end{tikzpicture}
+			} 
+				\subcaptionbox{Position der Servomaschinen \label{fig:servoPos}}
+				{
+					\tdplotsetmaincoords{60}{155}
+					\begin{tikzpicture}[tdplot_main_coords,scale=1.5]
+					\draw[->,thick] (0,0,0) -- (1.2,0,0) node[anchor = north east]{$x_G$};
+					\draw[->,thick] (0,0,0) -- (0,1.2,0) node[anchor = north west]{$y_G$};
+					\draw[->,thick] (0,0,0) -- (0,0,1) node[anchor = south west]{$z_G$};
+					\draw[blue] (0,0,0) circle(0.8);
+					\draw[red] (0,0,0) circle(0.55);
+					\fill[red] (-0.55,0,0) circle(0.05);
+					\fill[blue] (0,-0.8,0) circle(0.05);
+					\draw[dotted] (0,0,0) -- (0,0,5) -- (2,0,5) (0,0,5)--(-2,0,5);
+					\draw[dotted] (-1.5,0.5,5) -- (-1.5,-0.5,5) (1.5,0.5,5)--(1.5,-0.5,5);
+					\tdplotsetrotatedcoords{-90}{-90}{0}
+					\draw[tdplot_rotated_coords,|->] (4.8,-1.5,-0.5) arc(-180:90:0.2);
+					\draw[tdplot_rotated_coords,|->] (4.8,1.5,-0.5) arc(180:-90:0.2);
+					\draw node[below left](S1) at (1.5,0,5){$A_1$} node[below right](S2) at (-1.5,0,5){$A_2$};			
+					\draw[tdplot_rotated_coords,->,>=stealth] (5,1,0) arc (-90:-110:0.5) node[midway,above]{$\varphi_1$};
+					\draw[tdplot_rotated_coords,->,>=stealth] (5,-1,0) arc (90:110:0.5) node[midway,above]{$\varphi_2$};
+					\draw[->,>=stealth,very thick] (-1.5,0,5) -- ({-1.5+cos(-20)*1},0,{5+sin(-20)*1});
+					\draw[->,>=stealth,very thick] (1.5,0,5) -- ({1.5+cos(-160)*1},0,{5+sin(-160)*1});
+					\draw[thick,red] (0,-0.8,0) -- (0,-0.55,0) (0,0.8,0) -- (0,0.55,0);
+					\draw[thick,blue] (-0.8,0,0) -- ++(-0.25,0,0) (0.8,0,0) -- ++(0.25,0,0);
+					\draw[->,>=stealth,very thick] ({-1.5+cos(-20)*1},0,{5+sin(-20)*1}) -- (-0.55,0,0);
+					\draw[->,>=stealth,very thick] ({1.5+cos(-160)*1},0,{5+sin(-160)*1}) -- (0,-0.8,0);
+					\end{tikzpicture}
+			}}
+			\caption{Gimbal mit Aktuatoren. \subref{fig:gimbal} beschreibt die Winkel und Koordiantensysteme der kardanischen Aufhängung. \subref{fig:servoPos} beschreibt die Servoposition bezüglich des Ursprungs} \label{fig:GimbalDecript}
+			\end{figure}
+			 Abbildung \ref{fig:gimbal} beschreibt die Anordnung der Ringe und die Position der Aktuatoranbindungen. Punkt $O$ und $I$ stellen dabei die Verbindungsstellen der Aktuatoren mit dem Gimbalsystem dar. 
+			
+			Betrachtet man die Ringe als um das jeweils vorherige Koordinatensystem $S_0$ bzw. $S_1$ um den Winkel $\alpha$ oder $\beta$ gedrehte Koordinatensystem, ergeben sich folgende Transformationsbeziehungen: 
+			\begin{gather}
+				\mat{T}_{10}=\mat{Rot}_{x}=
+				\begin{bmatrix}
+				1 & 0 & 0 \\
+				0 & \cos{\alpha} & -\sin{\alpha} \\
+				0 & \sin{\alpha} & \cos{\alpha}
+				\end{bmatrix}	
+				\\
+				\mat{T}_{21}=\mat{Rot}_{y}=
+				\begin{bmatrix}
+				\cos{\beta} & 0 & \sin{\beta} \\
+				0 & 1 & 0 \\
+				-\sin{\beta} & 0 & \cos{\beta}
+				\end{bmatrix}
+				\\
+				\mat{T}_{20}=\mat{T}_{21} \mat{T}_{10}=
+				\begin{bmatrix} \cos{\beta} & 0 & \sin{\beta}\\ 
+				\sin{\alpha}\, \sin{\beta} & \cos{\alpha} & - \cos{\beta}\, \sin{\alpha}\\
+				 - \cos{\alpha}\, \sin{\beta} & \sin{\alpha} & \cos{\alpha}\, \cos{\beta} 
+				 \end{bmatrix}
+			\end{gather}
+			
+			Die Punkte $O$ und $I$ werden über ein Gestänge mit den Servomaschinen verbunden. Die Position der Servomaschinen kann Abbildung \ref{fig:servoPos} entnommen werden.
+			Die Gimbalkinematik lässt sich durch ein allgemeines, nichtlineares Gleichungssystem der Form
+			\begin{equation*}
+				\vec{w}=f\left(\vec{q}\right)\;\text{mit}\; \vec{w}=\begin{bmatrix}\alpha\\\beta\end{bmatrix}\in\mathbb{R}^W,\:\vec{q}=\begin{bmatrix}\phi_x\\\phi_y\end{bmatrix}\in\mathbb{R}^N
+			\end{equation*}
+			darstellen. Der Vektor $\vec{w}$ stellt dabei die Abtriebsseitigen und der Vektor $\vec{q}$ die Antriebsseitigen Gelenkwinkel dar.
+			Mit bekannter Länge $l_k$ der Verbindungsgestänge und bekannten Vektoren $\vec{c},\vec{a},\vec{s}_{n,0}=\overline{0A_n}$ lässt sich folgendes Gleichungssystem aufstellen:
+			\begin{gather}
+			\vec{s}_n = \vec{a}_n + \vec{b_n} - \vec{c}_n \\
+			\left|\vec{b}_n\right|=\sqrt{{b_{n,x}}^2+{b_{n,y}}^2+{b_{n,z}}^2}=l_k
+			\end{gather}
+			
+			Zur Beschreibung der Vektoren $\vec{c}$ und $\vec{a}$ werden folgende Gleichungen herangezogen.
+			\begin{align}
+			\vec{a}_n &= \begin{bmatrix}
+				l_{a,n}\sin q_n \\
+				a_{y,n} \\
+				l_{a,n}\cos q_n
+			\end{bmatrix} \\
+			\vec{c}_n &= {}^0T_n \vec{c}_{n,n},\quad \text{mit }n=1,2
+			\end{align}
+			Für den äußeren Ring ergibt sich folgendes:		
+			\begin{align}
+						s_{1,x}&=l_{a,1}\sin\varphi_1+b_{1,x}-c_{1,x}\label{eq:s1x}\\
+						s_{1,y}&=a_{y,1}+b_{1,y}-c_{1,y}\sin\alpha+c_{1,z}\cos\alpha\label{eq:s1y}\\
+						s_{1,z}&=l_{a,1}\cos\varphi_1+b_{1,z}-c_{1,z}\sin\alpha-c_{1,y}\cos\alpha\label{eq:s1z}\\
+						l_{k,1}&=\sqrt{{b_{1,x}}^2+{b_{1,y}}^2+{b_{1,z}}^2}\label{eq:lk}
+			\end{align}	
+			
+			Die Lösung für $b_{1,x}$ kann direkt aus (\ref{eq:s1x}) abgelesen werden und soll im folgenden $K$ genannt werden.
+				\begin{equation}
+					b_{1,x}=s_{1,x}-l_{1,a}\sin\phi_1+c_{1,x}=K
+				\end{equation}
+			Die Gleichungen (\ref{eq:s1y}) und (\ref{eq:s1z}) nach $b_{1,y}$ und $b_{1,z}$ umgestellt ergibt
+				\begin{align}
+					b_{1,y}&=\underbrace{(s_{1,y}-a_{1,y})}_{=const=A}+c_{1,y}\cos\alpha+c_{1,z}\sin\alpha\label{eq:b1y}\\
+					b_{1,z}&=\underbrace{(s_{1,z}-l_{a1}\sin\varphi_1)}_{=const=B}+c_{1,z}\cos\alpha-c_{1,y}\sin\alpha\label{eq:b1z}\\
+				\end{align}
+			(\ref{eq:b1y}) und (\ref{eq:b1z}) in (\ref{eq:lk}) eingesetzt ergibt nun:
+			\begin{equation}
+				\begin{split}
+					{l_{k,1}}^2=&K^2\ldots\\
+							   &+A^2+2A\left(c_{1,y}\cos\alpha+c_{1,z}\sin\alpha\right)+{c_{1,y}}^2{\cos}^2\alpha+2c_{1,y}c_{,z}\sin\alpha\cos\alpha+{c_{1,z}}^2\sin^2\alpha\\
+							   &+B^2+2B\left(c_{1,z}\cos\alpha-c_{1,y}\sin\alpha\right)+{c_{1,z}}^2\cos^2\alpha-2c_{1,y}c_{,z}\sin\alpha\cos\alpha+{c_{1,y}}^2\sin^2\alpha
+				\end{split}
+			\end{equation}
+			Umgestellt und vereinfacht ergibt sich:
+			\begin{gather}
+				\begin{split}
+				{l_{k,1}}^2 =& \underbrace{K^2+A^2+B^2+{c_{1,z}}^2+{c_{1,y}}^2}_{=const=C}\ldots\\
+							&+2A\left(c_{1,y}\cos\alpha+c_{1,z}\sin\alpha\right)\\
+							&+2B\left(c_{1,z}\cos\alpha-c_{1,y}\sin\alpha\right)
+				\end{split}\\
+				\qquad \nonumber \\
+				{l_{k,1}}^2 = C + \left(2A\,c_{1,z}-2B\,c_{1,y}\right)\sin\alpha + \left(2A\,c_{1,y}+2B\,c_{1,z}\right)\cos\alpha\label{eq:lk2}
+			\end{gather}
+			Gleichung (\ref{eq:lk2}) nach $\sin\alpha$ liefert:
+			\begin{equation}
+				\sin\alpha=\underbrace{\frac{{l_k}^2-C}{2\left(A\,c_{1,z}-B\,c_{1,y}\right)}}_{=const=K_1}-\underbrace{\frac{A\,c_{1,y}+B\,c_{1,z}}{A\,c_{1,z}-B\,c_{1,y}}}_{=const=K_2}\cos\alpha\label{eq:sinalpha}
+			\end{equation}
+			(\ref{eq:sinalpha}) quadrieren liefert:
+			\begin{equation}
+				\sin^2\alpha = {K_1}^2-2K_1K_2\cos\alpha+{K_2}^2\cos^2\alpha
+			\end{equation}
+			$\cos^2\alpha$ addieren:
+			\begin{equation}
+				\underbrace{\sin^2\alpha + \cos^2\alpha}_{=1}={K_1}^2-2K_1K_2\cos\alpha + \left({K_2}^2+1\right)\cos^2\alpha
+			\end{equation} 
+			Durch lösen der quadratischen Gleichung kann die Lösung für $\alpha$ gefunden werde:
+			\begin{gather}
+				\cos^2\alpha = z \nonumber\\
+				\rightarrow\quad\left({K_2}^2+1\right)z^2-2K_1K_2z+\left({K_1}^2-1\right)=0\\
+				\rightarrow\quad z_{1,2}=\frac{2K_1K_2\pm\sqrt{4{K_1}^2{K_2}^2-4\left({K_2}^2+1\right)\left({K_1}^2-1\right)}}{2\left({K_2}^2+1\right)}\\
+				\quad\nonumber\\
+				\alpha_{1,2}=\arccos\left(z_{1,2}\right)
+			\end{gather}
+			
+			Die Lösung für alpha lautet somit:
+			\begin{gather}
+				\alpha_{1,2}=\arccos\left(z_{1,2}\right)\\
+				\quad \nonumber \\
+				\text{mit}\quad z_{1,2}=\frac{2K_1K_2\pm\sqrt{4{K_1}^2{K_2}^2-4\left(K_2+1\right)\left(K_1-1\right)}}{2\left(K_2+1\right)} \nonumber\\
+			\end{gather}
+			\cleardoubleemptypage
+						Für den inneren Ring ergibt sich nun:	
+						\begin{equation}
+						\begin{bmatrix}
+						s_{2,x}\\s_{2,y}\\s_{2,z}\\l_{k,2}
+						\end{bmatrix}
+						=
+						\begin{bmatrix}
+						l_{a,2}\sin\varphi_2+b_{2,x}-c_{2,x}\cos\beta+c_{2,z}\cos\alpha\sin\beta-c_{2,y}\sin\alpha\sin\beta\\
+						a_{y,2}+b_{2,y}-c_{2,y}\cos\alpha-c_{2,z}\sin\alpha\\
+						l_{a,2}\cos\varphi_2+b_{2,z}-c_{2,x}\sin\beta-c_{2,z}\cos\alpha\cos\beta+c_{2,y}\sin\alpha\cos\beta\\
+						\sqrt{{b_{2,x}}^2+{b_{2,y}}^2+{b_{2,z}}^2}
+						\end{bmatrix}
+						\end{equation}
+	\section{Bergungssystem}
+	\section{Elektronik}
+	\section{Sensorik}
+	\section{Aktuatorik}
+	\section{Motor Gimbal}
+\chapter{Konstruktive Umsetzung}
+\chapter{Modellbildung}
+	\section{Räumliche Darstellung}
+		Um das System effizient zu beschreiben, ist es sinnvoll mehrere Koordinatensysteme einzuführen. Die Beziehung der Koordinatensysteme untereinander wird dabei über Transformationen hergestellt.
+		
+		Bei den im Rahmen dieser Arbeit verwendeten Koordinatensysteme handelt es sich, sofern nicht anders angegeben, um \textbf{rechtwinklige, kartesische Rechtssysteme}.
+		
+		Markante und wichtige Punkte innerhalb der definierten Systeme werden in Objektmatrizen zusammengefasst
+		\subsection{Koordinatensysteme}
+			\todo[inline]{Koordinatensysteme definieren}
+			\begin{figure}[h]
+			\begin{center}
+				\begin{tikzpicture}
+					\draw[thick] (0,0) rectangle(2.5,5) arc(0:180:1.25);
+					\draw[dashdotted,thin] (1.25,-0.25) -- ++(0,5.5+1.25);
+					\filldraw[fill=white,draw=black] (1.25,3) circle(0.1);
+					\fill[fill=black] (1.25,3) -- ++(0.1,0)  arc(0:90:0.1) -- ++(0,-0.2) arc(270:180:0.1);
+					\filldraw[fill=white,draw=black] (1.25,2) circle(0.1);
+					\fill[fill=black] (1.25,2) circle(0.03);
+					
+				
+					\begin{scope}[shift={(0.85,0)},rotate around={-20:(0.4,0)}]
+						\filldraw[fill = white,thick] (0,-0.25) rectangle(0.8,1.70);
+						\draw[dashdotted, thin] (0.4,-0.4) -- ++(0,2.2);
+						\draw[arrows=->,thick] (0.4,-0.25) -- ++(1,0,0);
+						\draw[arrows=->,thick] (0.4,-0.25) -- ++(0,1,0);
+						\draw[arrows=->,thick] (0.4,-0.25) -- ++(0,0,1);
+					\end{scope}
+				\end{tikzpicture}
+							\caption{Koordinatensystem der Rakete}
+							\label{fig:rocketCoords}
+							
+			\end{center}
+			
+			\end{figure}
+		\section{Räumliche Anordnung}\label{RAN}
+		Die Lage eines Objekts im Raum wird durch seine Position und Orientierung bestimmt und wird auch \textbf{Räumliche Anordnung RAN} genannt (vgl. VDI-Richtlinie 2860).
+		
+		Objekte lassen sich in Form einer Objektmatrix darstellen. Eine Objektmatrix ist die Sammlung der Objektpunkte bezüglich eines Referenzkoordinatensystems. Üblicherweise wird als Referenzsystem ein Objektfestes System verwendet. Damit lässt sich die Räumliche Anordnung bezüglich einem beliebigen System mit folgendem Zusammenhang darstellen.
+		\begin{equation}
+			{}_{a}\{OM\} = {}^{a}T_{b}[{}_{b}\{OM\}]
+		\end{equation} 
+		Wobei ${}_{a}\{OM\}$ die Objektmatrix bezüglich des a-Systems und ${}^{a}T_{b}$ die Transformationsoperation vom b- ins a-System beschreibt.
+		\subsection{Eulerwinkel}
+		Das im Abschnitt \ref{RAN} eingeführte Konzept zur Beschreibung der Räumlichen Anordnung lässt sich besonders einfach durch verkettete elementare Transformationsbeziehungen darstellen. \\
+		Allgemein lässt sich eine Transformation durch eine verkettete Drehung elementarer Rotationen darstellen. Auf Grund der nicht Kommutativen Multiplikation von Matrizen sind, je nach Reihenfolge der Multiplikation, die resultierende Transformationen jedoch unterschiedlich zu deuten.
+			\[{}^{a}R_{b}=R_{n} \cdot R_{n-1} \cdot \ldots \cdot R_{1}\]
+		Folgende Interpretationen sind möglich:
+		\begin{itemize}
+			\item \textbf{Euler-Winkel (Nachmultiplikation):} Multiplikation in der Reihenfolge \mbox{$n,n-1,\ldots,1$} Drehung immer um die momentanen Referenzachsen
+			\item \textbf{RPY-Winkel (Vormultiplikation):} Multiplikation in der Reihenfolge \mbox{$1,2,\ldots,n$}. Drehung immer um die festen Referenzachsen
+		\end{itemize}
+		
+		In dieser Arbeit wird, sofern nicht anders angegeben, mit Euler-Winkeln gerechnet. \todo[inline]{Welche Eulerwinkel sollen verwendet werden? Luftfahrtnorm?}
+		\subsection{Darstellung durch Quaternionen}
+			\todo[inline]{Quaternionen beschreiben und einpflegen}
+		\subsection{Einsparen von Rechenoperationen}
+	\section{Aerodyanmik}
+	\section{Kräfte und Momente}
+	Die resultierende Kraft $\vec{R}_{B}$ lässt sich folgendermaßen ausdrücken:
+		\begin{equation}
+			\vec{R}_{B} = \vec{A}_{B} + \vec{F}_{B} + \vec{K}_{B} + \vec{G}_B
+		\end{equation}
+		
+	\begin{itemize}
+		\item {$\vec{A}_{B}$: }Aerodynamische Kräfte
+		\item {$\vec{F}_{B}$: }Steuerkräfte
+		\item {$\vec{K}_{B}$: }Dynamische Kräfte
+		\item {$\vec{G}_{B}$: }Gewichtskraft
+	\end{itemize}
+
+	Der Momentenvektor $\vec{Q}$ ergibt sich durch:
+		\begin{equation}
+		\vec{Q} = \vec{Q}_{F} + \vec{Q}_{A} + \vec{Q}_{K}
+		\end{equation}
+		\begin{itemize}
+			\item	$\vec{Q_F}$: Steuermomente
+			\item   $\vec{Q_A}$: Aerodynamische Momente
+			\item   $\vec{Q_K}$: Dynamische Momente
+		\end{itemize}
+		\subsection{Aerodynamische Kräfte}
+		\subsection{Steuerkräfte}
+		\subsection{Dynamische Kräfte}
+	\section{Bewegungsgleichungen}
+		\subsection{Differentialgleichungen der translatorischen Bewegung}
+		\subsection{Differentialgleichungen der rotatorischen Bewegung}
+\addchap*{TestTest}
+\chapter{Numerische Simulation}
+	\section{Tools}
+	\section{Atmosphärenmodell}
+	\section{Implementierung}
+		\subsection{Integrationsverfahren}
+\chapter{Flugregelung}
+\pagenumbering{Alph}
+\begin{appendix}
+	\chapter{Test}
+\end{appendix}
+\end{document} 
