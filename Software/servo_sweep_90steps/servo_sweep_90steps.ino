@@ -14,12 +14,12 @@ void setup()
  
 void loop() 
 { 
+  myservo.write(90); // central position, Servo library assumes full 0-180° deflection
+  delay(1000);
+  myservo.write(180); // extended one side
+  delay(1000);
   myservo.write(90);
   delay(1000);
-  myservo.write(180);
-  delay(1000);
-  myservo.write(90);
-  delay(1000);
-  myservo.write(0);
+  myservo.write(0); // extended other side
   delay(1000);
 } 
