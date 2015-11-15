@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.21)  10 NOV 2015 21:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.21)  10 NOV 2015 23:11
 entering extended mode
 **rtvc.tex
 (rtvc.tex
@@ -1430,10 +1430,10 @@ Package rerunfilecheck Info: File `rtvc.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 569.
  ) 
 Here is how much of TeX's memory you used:
- 30564 strings out of 493673
- 575053 string characters out of 3141527
+ 30560 strings out of 493673
+ 574956 string characters out of 3141527
  701402 words of memory out of 3000000
- 33282 multiletter control sequences out of 15000+200000
+ 33278 multiletter control sequences out of 15000+200000
  60831 words of font info for 64 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  64i,22n,90p,10386b,1082s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1454,7 +1454,7 @@ am Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files
 X 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/public/lm/lmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
 /amsfonts/symbols/msbm10.pfb>
-Output written on rtvc.pdf (20 pages, 305547 bytes).
+Output written on rtvc.pdf (20 pages, 305563 bytes).
 PDF statistics:
  460 PDF objects out of 1000 (max. 8388607)
  98 named destinations out of 1000 (max. 500000)
