@@ -1,0 +1,87 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          | 
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         | 
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "rtvcFinal.fms";
+maxCellSize 0.175;
+
+localRefinement
+{
+	base
+	{
+		cellSize 0.002;
+		refinementTickness 0.04;
+	}
+	bodytube
+	{
+		cellSize 0.003;
+		refinementThickness 0.015;
+	}
+	nosecone
+	{
+		cellSize 0.003;
+		refinementThickness 0.015;
+	}
+}
+
+
+objectRefinements
+{
+	wakeZone
+	{
+		type 	cone;
+		cellSize	0.003;
+		p0	(0 0 0);
+		p1	(0 0 -0.4);
+		radius0	0.055;
+		radius1	0.055;
+	}
+	nearField
+	{
+		type sphere;
+		additionalRefinementLevels 4;
+		centre	(0 0 0);
+		radius	0.4;
+	}
+}
+
+boundaryLayers
+{
+	patchBoundaryLayers
+	{
+		bodytube
+		{
+			nLayers 15;
+			thicknessRatio 1.25;
+			allowDiscontinuity 1;
+		}
+		nosecone
+		{
+			nLayers 15;
+			thicknessRatio 1.25;
+		}
+		base
+		{
+			nLayers 15;
+			thicknessRatio 1.25;
+		}
+			
+	}
+}
+
+
