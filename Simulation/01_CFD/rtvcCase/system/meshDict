@@ -18,70 +18,141 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 surfaceFile "rtvcFinal.fms";
-maxCellSize 0.175;
+maxCellSize 0.325;
 
 localRefinement
 {
-	base
-	{
-		cellSize 0.002;
-		refinementTickness 0.04;
-	}
-	bodytube
-	{
-		cellSize 0.003;
-		refinementThickness 0.015;
-	}
-	nosecone
-	{
-		cellSize 0.003;
-		refinementThickness 0.015;
-	}
+        nosecone
+        {
+                cellSize 0.003;
+                refinementThickness 0.0;
+        }
+        bodytube
+        {
+                cellSize 0.004;
+                refinementThickness 0.0;
+        }
+        base
+        {
+                refinementThickness 0.01;
+                cellSize 0.012;
+        }
+        farField
+        {
+                cellSize 0.325;
+        }
 }
 
 
 objectRefinements
 {
-	wakeZone
-	{
-		type 	cone;
-		cellSize	0.003;
-		p0	(0 0 0);
-		p1	(0 0 -0.4);
-		radius0	0.055;
-		radius1	0.055;
-	}
-	nearField
-	{
-		type sphere;
-		additionalRefinementLevels 4;
-		centre	(0 0 0);
-		radius	0.4;
-	}
+    nearField6
+        {
+            type sphere;
+            radius 1.3;
+            centre (0 0 0.1675);
+            additionalRefinementLevels 1;
+        } 
+    nearField5
+        {
+            type sphere;
+            radius 1;
+            centre (0 0 0.1675);
+            additionalRefinementLevels 2;
+        } 
+          
+    nearField4
+        {
+            type sphere;
+            radius 0.7;
+            centre (0 0 0.1675);
+            additionalRefinementLevels 3;
+        }      
+    nearField3
+        {
+            type sphere;
+            radius 0.6;
+            centre (0 0 0.1675);
+            additionalRefinementLevels 4;
+        }
+       
+    nearField2
+        {
+            type sphere;
+            radius 0.35;
+            centre (0 0 0.1675);
+            additionalRefinementLevels 5;
+        }
+   
+    nearField1
+        {
+            type sphere;
+            radius 0.201;
+            centre (0 0 0.1675);
+            additionalRefinementLevels 6;
+        }
+    wakeRefinement1
+        {
+            type cone;
+            p0 (0 0 0);
+            p1 (0 0 -0.8);
+            radius0 0.1;
+            radius1 0.1;
+            additionalRefinementLevels 5;
+        }
+    wakeRefinement2
+        {
+            type cone;
+            p0 (0 0 0);
+            p1 (0 0 -0.075);
+            radius0 0.04;
+            radius1 0.08;
+            additionalRefinementLevels 6;
+        }
+    baseRefinement
+        {
+            type cone;
+            p0 (0 0 0.01);
+            p1 (0 0 -0.04);
+            radius0 0.035;
+            radius1 0.035;
+            additionalRefinementLevels 8;
+        }
+    noseconeTipRefinement
+        {
+         type sphere;
+         centre (0 0 0.335);
+         radius 0.02;
+         additionalRefinementLevels 8;
+        }
 }
 
 boundaryLayers
 {
-	patchBoundaryLayers
-	{
-		bodytube
-		{
-			nLayers 15;
-			thicknessRatio 1.25;
-			allowDiscontinuity 1;
-		}
-		nosecone
-		{
-			nLayers 15;
-			thicknessRatio 1.25;
-		}
-		base
-		{
-			nLayers 15;
-			thicknessRatio 1.25;
-		}
-			
-	}
+    optimiseLayer 1;
+    patchBoundaryLayers
+    {
+        nosecone
+        {
+            nLayers 10;
+            thicknessRatio 1.15;
+            
+        }
+        bodytube
+        {
+            nLayers 10;
+            thicknessRatio 1.15;
+            allowDiscontinuity 1;
+        }
+    }
+    
+    optimisationParameters
+    {
+            nSmoothNormals 2;
+            featureSizeFactor  0.1;
+            reCalculateNormals 1;
+            relThicknessTol  0.05;
+    }
 }
-
-
+    
+    

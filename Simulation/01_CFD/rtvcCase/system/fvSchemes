@@ -30,7 +30,7 @@ divSchemes
     default         none;
     div(phi,U)      bounded Gauss linearUpwind grad(U);
     div(phi,nuTilda) bounded Gauss linearUpwind grad(nuTilda);
-    div((nuEff*dev(T(grad(U))))) Gauss linear;
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
 }
 
 laplacianSchemes
@@ -54,6 +54,10 @@ fluxRequired
     p               ;
 }
 
+wallDist
+{
+    method meshWave;
+}
 // ************************************************************************* //
 
 

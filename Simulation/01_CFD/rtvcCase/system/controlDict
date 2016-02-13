@@ -14,6 +14,7 @@ FoamFile
     object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+#include "../boundaryConditions"
 
 application     simpleFoam;
 
@@ -23,13 +24,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         1500;
+endTime         1000;
 
 deltaT          1;
 
 writeControl    timeStep;
 
-writeInterval   50;
+writeInterval   250;
 
 purgeWrite      0;
 
@@ -51,7 +52,7 @@ functions
 	{
 		type forceCoeffs;
 		functionObjectLibs ("libforces.so");
-		patches (base bodytube noseconeBase noseconeTip); //change to your patch name
+		patches (base bodytube nosecone); //change to your patch name
 		pName p;
 		uName U;
 		rhoName rhoInf;
@@ -60,9 +61,10 @@ functions
 		liftDir (0 1 0);
 		dragDir (0 0 -1);
 		pitchAxis (1 0 0);
-		magUInf 15;
+		magUInf $magUInf;
 		lRef 0.067;
 		Aref 0.0036317;
+                outputControl timeStep;
 	}
 );
 // ************************************************************************* //

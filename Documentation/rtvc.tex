@@ -315,6 +315,7 @@ pdfkeywords={Konstruktion, Entwicklung, Simulation, Roboter}
 			} 
 				\subcaptionbox{Position der Servomaschinen \label{fig:servoPos}}
 				{
+					\centering
 					\tdplotsetmaincoords{60}{155}
 					\begin{tikzpicture}[tdplot_main_coords,scale=1.5]
 					\draw[->,thick] (0,0,0) -- (1.2,0,0) node[anchor = north east]{$x_G$};
@@ -470,6 +471,24 @@ pdfkeywords={Konstruktion, Entwicklung, Simulation, Roboter}
 	\section{Aktuatorik}
 	\section{Motor Gimbal}
 \chapter{Konstruktive Umsetzung}
+\chapter{CFD-Analyse}
+Um die Aerodynamischen Kräfte (siehe Kapitel \ref{sec:AeroForce}) bestimmen zu können benötigt es Kenntnisse über die Aerodynamischen Beiwerte, insbesondere dem Auftriebs- und Widerstandsbeiwert.
+
+Da sich das beschriebene Modell in einem sehr kleinen Reynoldszahlbereich bewegt ist nicht sicher ob die, im Raketenmodellbau üblichen Methoden, wie Barrowman gültig sind. Deshalb soll mittels einer CFD-Analyse die Beiwerte bestimmt werden.
+
+Als Software soll OpenFOAM zum Einsatz kommen. OpenFOAM ist eine freie Bibliothek zum lösen von partiellen Differenzialproplemen, hauptsächlich aus dem Gebiet der Strömungsmechanik.
+Zum vernetzen des Rechennetz kommt cfMesh zum Einsatz. cfMesh erlaubt das erstellen von Hexaeder, Tetraeder oder Polyeder Netzen anhand aus CAD-Daten generierten Flächennetzen. 
+\section{Rechennetz}
+Der Aufbau des Rechennetz kann in Abbildung \ref{fig:RechennetzSchematisch}
+\begin{figure}[h]
+	\begin{tikzpicture}[scale = 3]
+	\draw (0,0) circle(1.5);
+	\draw (0,-0.034) -- (0,0.034) -- (-0.23,0.034) -- (-0.23,-0.034) -- cycle;
+	\draw (-0.23,-0.034) arc(270:90:0.102 and 0.034);
+	\end{tikzpicture}
+\end{figure}
+\section{Randbedingungen und Solver}
+\section{Ergebnisse} 
 \chapter{Modellbildung}
 	\section{Räumliche Darstellung}
 		Um das System effizient zu beschreiben, ist es sinnvoll mehrere Koordinatensysteme einzuführen. Die Beziehung der Koordinatensysteme untereinander wird dabei über Transformationen hergestellt.
@@ -482,7 +501,7 @@ pdfkeywords={Konstruktion, Entwicklung, Simulation, Roboter}
 			\begin{figure}[h]
 			\begin{center}
 				\begin{tikzpicture}
-					\draw[thick] (0,0) rectangle(2.5,5) arc(0:180:1.25);
+					\draw[thick] (0,0) rectangle(2.5,5) arc(0:180:1.25 and 3.5);
 					\draw[dashdotted,thin] (1.25,-0.25) -- ++(0,5.5+1.25);
 					\filldraw[fill=white,draw=black] (1.25,3) circle(0.1);
 					\fill[fill=black] (1.25,3) -- ++(0.1,0)  arc(0:90:0.1) -- ++(0,-0.2) arc(270:180:0.1);
@@ -549,13 +568,12 @@ pdfkeywords={Konstruktion, Entwicklung, Simulation, Roboter}
 			\item   $\vec{Q_A}$: Aerodynamische Momente
 			\item   $\vec{Q_K}$: Dynamische Momente
 		\end{itemize}
-		\subsection{Aerodynamische Kräfte}
+		\subsection{Aerodynamische Kräfte}\label{sec:AeroForce}
 		\subsection{Steuerkräfte}
 		\subsection{Dynamische Kräfte}
 	\section{Bewegungsgleichungen}
 		\subsection{Differentialgleichungen der translatorischen Bewegung}
 		\subsection{Differentialgleichungen der rotatorischen Bewegung}
-\addchap*{TestTest}
 \chapter{Numerische Simulation}
 	\section{Tools}
 	\section{Atmosphärenmodell}

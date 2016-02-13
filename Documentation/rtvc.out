@@ -12,25 +12,29 @@
 \BOOKMARK [1][]{section.2.5}{2.5 Aktuatorik}{chapter.2}% 12
 \BOOKMARK [1][]{section.2.6}{2.6 Motor Gimbal}{chapter.2}% 13
 \BOOKMARK [0][]{chapter.3}{3 Konstruktive Umsetzung}{}% 14
-\BOOKMARK [0][]{chapter.4}{4 Modellbildung}{}% 15
-\BOOKMARK [1][]{section.4.1}{4.1 R\344umliche Darstellung}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.1.1}{4.1.1 Koordinatensysteme}{section.4.1}% 17
-\BOOKMARK [1][]{section.4.2}{4.2 R\344umliche Anordnung}{chapter.4}% 18
-\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 Eulerwinkel}{section.4.2}% 19
-\BOOKMARK [2][-]{subsection.4.2.2}{4.2.2 Darstellung durch Quaternionen}{section.4.2}% 20
-\BOOKMARK [2][-]{subsection.4.2.3}{4.2.3 Einsparen von Rechenoperationen}{section.4.2}% 21
-\BOOKMARK [1][]{section.4.3}{4.3 Aerodyanmik}{chapter.4}% 22
-\BOOKMARK [1][]{section.4.4}{4.4 Kr\344fte und Momente}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.4.1}{4.4.1 Aerodynamische Kr\344fte}{section.4.4}% 24
-\BOOKMARK [2][-]{subsection.4.4.2}{4.4.2 Steuerkr\344fte}{section.4.4}% 25
-\BOOKMARK [2][-]{subsection.4.4.3}{4.4.3 Dynamische Kr\344fte}{section.4.4}% 26
-\BOOKMARK [1][]{section.4.5}{4.5 Bewegungsgleichungen}{chapter.4}% 27
-\BOOKMARK [2][-]{subsection.4.5.1}{4.5.1 Differentialgleichungen der translatorischen Bewegung}{section.4.5}% 28
-\BOOKMARK [2][-]{subsection.4.5.2}{4.5.2 Differentialgleichungen der rotatorischen Bewegung}{section.4.5}% 29
-\BOOKMARK [0][]{chapter.5}{5 Numerische Simulation}{}% 30
-\BOOKMARK [1][]{section.5.1}{5.1 Tools}{chapter.5}% 31
-\BOOKMARK [1][]{section.5.2}{5.2 Atmosph\344renmodell}{chapter.5}% 32
-\BOOKMARK [1][]{section.5.3}{5.3 Implementierung}{chapter.5}% 33
-\BOOKMARK [2][-]{subsection.5.3.1}{5.3.1 Integrationsverfahren}{section.5.3}% 34
-\BOOKMARK [0][]{chapter.6}{6 Flugregelung}{}% 35
-\BOOKMARK [0][]{appendix.A}{A Test}{}% 36
+\BOOKMARK [0][]{chapter.4}{4 CFD-Analyse}{}% 15
+\BOOKMARK [1][]{section.4.1}{4.1 Rechennetz}{chapter.4}% 16
+\BOOKMARK [1][]{section.4.2}{4.2 Randbedingungen und Solver}{chapter.4}% 17
+\BOOKMARK [1][]{section.4.3}{4.3 Ergebnisse}{chapter.4}% 18
+\BOOKMARK [0][]{chapter.5}{5 Modellbildung}{}% 19
+\BOOKMARK [1][]{section.5.1}{5.1 R\344umliche Darstellung}{chapter.5}% 20
+\BOOKMARK [2][-]{subsection.5.1.1}{5.1.1 Koordinatensysteme}{section.5.1}% 21
+\BOOKMARK [1][]{section.5.2}{5.2 R\344umliche Anordnung}{chapter.5}% 22
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Eulerwinkel}{section.5.2}% 23
+\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Darstellung durch Quaternionen}{section.5.2}% 24
+\BOOKMARK [2][-]{subsection.5.2.3}{5.2.3 Einsparen von Rechenoperationen}{section.5.2}% 25
+\BOOKMARK [1][]{section.5.3}{5.3 Aerodyanmik}{chapter.5}% 26
+\BOOKMARK [1][]{section.5.4}{5.4 Kr\344fte und Momente}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.4.1}{5.4.1 Aerodynamische Kr\344fte}{section.5.4}% 28
+\BOOKMARK [2][-]{subsection.5.4.2}{5.4.2 Steuerkr\344fte}{section.5.4}% 29
+\BOOKMARK [2][-]{subsection.5.4.3}{5.4.3 Dynamische Kr\344fte}{section.5.4}% 30
+\BOOKMARK [1][]{section.5.5}{5.5 Bewegungsgleichungen}{chapter.5}% 31
+\BOOKMARK [2][-]{subsection.5.5.1}{5.5.1 Differentialgleichungen der translatorischen Bewegung}{section.5.5}% 32
+\BOOKMARK [2][-]{subsection.5.5.2}{5.5.2 Differentialgleichungen der rotatorischen Bewegung}{section.5.5}% 33
+\BOOKMARK [0][]{chapter.6}{6 Numerische Simulation}{}% 34
+\BOOKMARK [1][]{section.6.1}{6.1 Tools}{chapter.6}% 35
+\BOOKMARK [1][]{section.6.2}{6.2 Atmosph\344renmodell}{chapter.6}% 36
+\BOOKMARK [1][]{section.6.3}{6.3 Implementierung}{chapter.6}% 37
+\BOOKMARK [2][-]{subsection.6.3.1}{6.3.1 Integrationsverfahren}{section.6.3}% 38
+\BOOKMARK [0][]{chapter.7}{7 Flugregelung}{}% 39
+\BOOKMARK [0][]{appendix.A}{A Test}{}% 40

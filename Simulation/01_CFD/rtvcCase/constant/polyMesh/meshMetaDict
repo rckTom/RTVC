@@ -1,0 +1,58 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/polyMesh";
+    object      meshMetaDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile     "rtvcFinal.fms";
+
+surfaceMeta
+{
+    nPoints         41942;
+    nFacets         83876;
+    nPatches        4;
+    nFeatureEdges   589;
+    patches
+    {
+        base
+        {
+            type            wall;
+            nFacets         3591;
+        }
+        bodytube
+        {
+            type            wall;
+            nFacets         50990;
+        }
+        farField
+        {
+            type            patch;
+            nFacets         11330;
+        }
+        nosecone
+        {
+            type            wall;
+            nFacets         17965;
+        }
+    }
+    pointSubsets
+    {
+    }
+    facetSubsets
+    {
+    }
+    featureEdgeSubsets
+    {
+    }
+}

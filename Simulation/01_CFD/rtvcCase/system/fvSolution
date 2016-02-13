@@ -19,17 +19,16 @@ solvers
 {
     p
     {
-        solver          GAMG;
-	preconditioner	FDIC;
-        tolerance       1e-06;
-        relTol          0.1;
-        smoother        GaussSeidel;
-        nPreSweeps      0;
-        nPostSweeps     2;
-        cacheAgglomeration true;
+        solver           GAMG;
+        tolerance        1e-8;
+        relTol           0.01;
+        smoother         GaussSeidel;
+        nPreSweeps       0;
+        nPostSweeps      2;
+        cacheAgglomeration on;
+        agglomerator     faceAreaPair;
         nCellsInCoarsestLevel 100;
-        agglomerator    faceAreaPair;
-        mergeLevels     1;
+        mergeLevels      1;
     }
 
     U
@@ -38,7 +37,7 @@ solvers
         smoother        GaussSeidel;
         nSweeps         2;
         tolerance       1e-08;
-        relTol          0.1;
+        relTol          0.01;
     }
 
     nuTilda
@@ -46,30 +45,35 @@ solvers
         solver          smoothSolver;
         smoother        GaussSeidel;
         nSweeps         2;
-        tolerance       1e-08;
-        relTol          0.1;
+        tolerance       1e-11;
+        relTol          0.01;
     }
 }
 
 SIMPLE
 {
     nNonOrthogonalCorrectors 0;
+    consistent yes;
     pRefCell        0;
     pRefValue       0;
-
     residualControl
     {
         p               1e-6;
         U               1e-6;
-        nuTilda         1e-6;
+        // Add other variables here
     }
+}
+
+potentialFlow
+{
+    nNonOrthogonalCorrectors 10;
 }
 
 relaxationFactors
 {
     fields
     {
-        p               0.5;
+        p               0.7;
     }
     equations
     {
