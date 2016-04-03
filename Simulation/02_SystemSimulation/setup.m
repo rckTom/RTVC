@@ -1,7 +1,6 @@
 more off
 
-%check for dependencies
-
+%load dependencies
 pkg load quaternion
 
 %Modules
@@ -12,6 +11,8 @@ addpath('./EquationsOfMotion');
 addpath('./Propulsion');
 addpath('./generic');
 addpath('./actuator');
+addpath('./Rail');
+addpath('./control');
 addpath('./math/vectorMath');
 addpath('./math/odeSolver');
 addpath('./math/quaternion');
