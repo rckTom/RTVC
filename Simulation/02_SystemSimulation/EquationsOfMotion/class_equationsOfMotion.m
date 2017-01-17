@@ -33,6 +33,7 @@ classdef class_equationsOfMotion
         R_Pf = T_fp * BusProp.R_Pp;
         Q_Pf = tilde(BusProp.r_fpf+T_fp*BusProp.r_np)*R_Pf;
         
+        
         %rocket mass
         m = BusProp.m + obj.m_struct;
         
@@ -51,7 +52,10 @@ classdef class_equationsOfMotion
         BusEoM.vdot_f = ydot(4:6);
         BusEoM.qdot = ydot(7:10);
         BusEoM.omegadot_f = ydot(11:13);
-
+        BusEoM.R_Pf = R_Pf;
+        BusEoM.Q_Pf = Q_Pf;
+        BusEoM.R_Af = R_Af;
+        BusEoM.Q_Af = Q_Af;
         
         if(norm(BusEoM.v_f) <= 0.05)
           BusEoM.a = 0;

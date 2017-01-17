@@ -3,7 +3,7 @@ classdef class_BusAero < Bus
     R_Aa;
     Q_Aa;
     Aref;
-    r_ref;
+    S_z;
     busName = 'busAero';
   end
 end

@@ -10,5 +10,9 @@ classdef class_BusEoM < Bus
     v_e;
     a;
     b;
+    R_Pf;
+    Q_Pf;
+    R_Af;
+    Q_Af;
   end
 end
