@@ -1,0 +1,34 @@
+=== Bestimmung des Trägheitsmoments ===
+
+== Pendel ==
+
+- Aufhängung des zu vermessenden Körpers so dass er um seinen Schwerpunkt rotieren kann
+- Befestigen einer zusätzlichen Masse m im Abstand R von der Drehachse
+- Auslenkung des Körpers aus der Gleichgewichtslage, um ca. 10-20°
+- Messung der Dauer von 5 Schwingungen
+	- mehrmals
+	- für verschiedene Zusatzmassen m
+- Bestimmung der durchschnittl. Zeitkonstanten und der Abweichung
+- Bestimmung der Gesamt-Trägheit I aus nach T = 2 \pi \sqrt{\frac{I}{m g R}}
+- Bestimmung des Trägheitsmoments der Zusatzmasse
+- Bestimmung des Trägheitsmoments des zu vermessenden Körpers
+
+Hinweise:
+- Reibung möglichst minimieren
+- Luftwiderstand muss vernachlässigt werden
+
+Siehe auch:
+http://www.physik.fh-aachen.de/fileadmin/inhalte/etechnik/pdf/praktikum/Massentraegheitsmoment.pdf
+
+== Drehscheibe ==
+
+- Möglichst reibungsfrei gelagerte Drehscheibe
+- Spiralfeder mit Federkonstante D
+- Schwingungsdauer ergibt sich zu T = 2 \pi \sqrt{\frac{I}{D}}
+- I hängt davon ab ob der Versuchsaufbau leer ist (I_0) oder mit dem zu vermessenden Körper (I = I_0 + I_K)
+
+Hinweise:
+- Reibung möglichst minimieren
+
+Siehe auch:
+http://www.paehler.org/tim/archiv/extern/david/htmlexamen/22Bestimmung.html
