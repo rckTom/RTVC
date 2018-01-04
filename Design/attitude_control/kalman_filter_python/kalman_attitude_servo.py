@@ -1,24 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+F = 3
+a = 0.04
+J = 8.1e-4
+
 # state transformation matrix
-A = np.matrix([[1, 0.01, 0],[0, 1, 0.01], [0, 0, 1]])
+A = np.matrix([[1,0.01,0,0,0],
+               [0,1,0.01,0,0],
+               [0,0,1,F*a/J,0],
+               [0,0,0,1,0.01],
+               [0,0,0,-113.64,-1.16]])
 
 # command matrix
-B = np.matrix([[0.0],[0.0],[3.0*0.04/8.1e-4]])
-# B = np.matrix([[0.0],[0.0],[0.0]])
+B = np.matrix([[0.0],
+               [0.0],
+               [0.0],
+               [0.0],
+               [113.64]])
 
 # initial state (known or estimated)
-X = np.matrix([[0.0],[0.0],[0.0]])
+X = np.matrix([[0.0],[0.0],[0.0],[0.0],[0.0]])
 
 # initial error covariance
-P = np.matrix(np.identity(3))
+P = np.matrix(np.identity(5))
 
 # system error covariance
-Q = 0.01 * np.matrix(np.identity(3))
+Q = 0.1 * np.matrix(np.identity(5))
 
 # measurement to state translation
-H = np.matrix([0.0,1.0,0.0])
+H = np.matrix([0.0,1.0,0.0,0.0,0.0])
 
 # measurement noise covariance
 R = np.matrix([0.05])
@@ -48,7 +59,7 @@ for z in Z:
     u = k_P * X[0,0] + k_I * e_int + k_D * X[1,0]
     
 # take command from file
-# for z, u in zip(Z, U):
+#for z, u in zip(Z, U):
     
     # prediction
     X_prio = A*X + B*u
@@ -57,7 +68,7 @@ for z in Z:
     # correction
     K = P_prio*H.T*np.linalg.inv(H*P_prio*H.T+R)
     X = X_prio + K*(z-H*X_prio)
-    P = (np.matrix(np.identity(3)) - K*H)*P_prio
+    P = (np.matrix(np.identity(5)) - K*H)*P_prio
     
     # save history
     u_hist.append(u)
@@ -116,5 +127,5 @@ ax[1].plot(gamma_hist, 'r-')
 ax[2].plot(U, 'g-')
 ax[2].plot(u_hist, 'r-')
 
-plt.savefig("kalman_attitude_Bdirect.png")
+plt.savefig("kalman_attitude_servo_Q0.1_ulive.png")
 plt.show()
