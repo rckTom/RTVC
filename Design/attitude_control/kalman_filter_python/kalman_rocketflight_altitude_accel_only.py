@@ -11,13 +11,13 @@ X = np.matrix([[0.0],[0.0],[0.0]])
 P = np.matrix(np.identity(3))
 
 # system error covariance
-Q = 0.01 * np.matrix(np.identity(3))
+Q = 0.1 * np.matrix(np.identity(3))
 
 # measurement to state translation
 H = np.matrix([[0,0,1.0]])
 
 # measurement noise covariance
-R = np.matrix([[1.0]])
+R = np.matrix([[0.01]])
 
 X_prio_hist = []
 P_prio_hist = []
@@ -25,10 +25,11 @@ K_hist = []
 X_hist = []
 P_hist = []
 
-Z=np.loadtxt("z_alti_accel.csv")
-Z=Z[:,1]
 v=np.loadtxt("v.csv")
 a=np.loadtxt("a.csv")
+# Z=np.loadtxt("z_alti_accel.csv")
+# Z=Z[:,1]
+Z=a+np.random.normal(0, 0.044, a.shape)
 
 # # updating K and P
 # for z in Z:
@@ -48,14 +49,22 @@ a=np.loadtxt("a.csv")
 #     X_hist.append(X)
 #     P_hist.append(P)
 
-# converged K and P from last run
-K = np.matrix([[0.00086076],
-               [0.00904875],
-               [0.09512492]])
+# # converged K and P from last run
+# K = np.matrix([[0.00086076],
+#                [0.00904875],
+#                [0.09512492]])
 
-P = np.matrix([[  1.72873653e+02,   3.17903414e+01,   8.60761712e-04],
-               [  3.17903414e+01,   8.08000951e+00,   9.04875078e-03],
-               [  8.60761712e-04,   9.04875078e-03,   9.51249220e-02]])
+# P = np.matrix([[  1.72873653e+02,   3.17903414e+01,   8.60761712e-04],
+#                [  3.17903414e+01,   8.08000951e+00,   9.04875078e-03],
+#                [  8.60761712e-04,   9.04875078e-03,   9.51249220e-02]])
+
+# converged K and P from Q=0.1 and R=0.01
+# K = np.matrix([[7.7e-7],
+#                [8.4e-4],
+#                [9.2e-1]])
+K = np.matrix([[0.0e+0],
+               [0.0e+0],
+               [9.2e-1]])
 
 for z in Z:
     # prediction
