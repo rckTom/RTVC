@@ -21,7 +21,7 @@ Q = 0.01 * np.matrix(np.identity(3))
 H = np.matrix([0.0,1.0,0.0])
 
 # measurement noise covariance
-R = np.matrix([0.05])
+R = np.matrix([0.02])
 
 X_prio_hist = []
 P_prio_hist = []
@@ -40,7 +40,7 @@ k_P = -5.0
 k_I = -5.0
 k_D = -1.0
 
-# updating K and P
+"""# updating K and P
 
 # determine command from PID
 for z in Z:
@@ -51,7 +51,8 @@ for z in Z:
 # for z, u in zip(Z, U):
     
     # prediction
-    X_prio = A*X + B*u
+    # X_prio = A*X + B*u
+    X_prio = A*X
     P_prio = A*P*A.T + Q
     
     # correction
@@ -65,27 +66,27 @@ for z in Z:
     P_prio_hist.append(P_prio)
     K_hist.append(K)
     X_hist.append(X)
-    P_hist.append(P)
+    P_hist.append(P)"""
 
 # # converged K and P from last run
-# K = np.matrix([[ 0.19486624],
-        # [ 0.32049976],
-        # [ 0.17945697]])
+K = np.matrix([[0.00733],
+               [0.267],
+               [0.258]])
 
 # P = np.matrix([[ 0.04871656,  0.08012494,  0.04486424],
         # [ 0.08012494,  1.88353956,  1.08584885],
         # [ 0.04486424,  1.08584885,  1.78593403]])
 
-# for z in Z:
-    # # prediction
-    # X_prio = A*X
+for z in Z:
+    # prediction
+    X_prio = A*X
     
-    # # correction
-    # X = X_prio + K*(np.matrix(z).T-H*X_prio)
+    # correction
+    X = X_prio + K*(np.matrix(z).T-H*X_prio)
     
-    # # save history
-    # X_prio_hist.append(X_prio)
-    # X_hist.append(X)
+    # save history
+    X_prio_hist.append(X_prio)
+    X_hist.append(X)
 
 print("Final Kalman gain matrix K")
 print(K)
