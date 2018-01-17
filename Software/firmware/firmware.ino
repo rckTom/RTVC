@@ -33,9 +33,9 @@
 #define K_gamma_y_ddot 0.5 // DRAGONS?
 
 // PID controller gains
-#define K_P -5.0 // DRAGONS
-#define K_I -5.0 // DRAGONS
-#define K_D -1.0 // DRAGONS
+#define K_P -2.0 // DRAGONS
+#define K_I -1.8 // DRAGONS
+#define K_D -0.3 // DRAGONS
 
 #define TIMESTEP 5 // timestep in multiples of 2.048 ms
 #define delta_t 0.01024

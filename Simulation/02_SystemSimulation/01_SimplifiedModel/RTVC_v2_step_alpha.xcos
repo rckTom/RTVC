@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<XcosDiagram debugLevel="0" finalIntegrationTime="3.0" integratorAbsoluteTolerance="1.0E-6" integratorRelativeTolerance="1.0E-6" toleranceOnTime="1.0E-10" maxIntegrationTimeInterval="100001.0" maximumStepSize="0.0" realTimeScaling="0.0" solver="1.0" background="-1" gridEnabled="1" title="RTVC_v2_step_alpha"><!--Xcos - 2.0 - scilab-6.0.0 - 20170214 1336-->
+<XcosDiagram debugLevel="0" finalIntegrationTime="3.0" integratorAbsoluteTolerance="1.0E-6" integratorRelativeTolerance="1.0E-6" toleranceOnTime="1.0E-10" maxIntegrationTimeInterval="100001.0" maximumStepSize="0.0" realTimeScaling="0.0" solver="1.0" background="-1" gridEnabled="1" title="RTVC_v2_step_alpha"><!--Xcos - 2.0 - scilab-6.0.0 - 20170214 1426-->
   <Array as="context" scilabClass="String[]">
     <add value="rho=1.225"/>
     <add value="V=10"/>
@@ -477,11 +477,11 @@
               <ControlPort id="-29bf49e9:160e22701e2:-7f0d" parent="-29bf49e9:160e22701e2:-7f0e" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.0" style="ControlPort;align=center;verticalAlign=top;spacing=10.0"/>
               <BasicBlock id="-29bf49e9:160e22701e2:-7f0c" parent="-29bf49e9:160e22701e4:-7f36" interfaceFunctionName="EVTDLY_c" blockType="d" dependsOnU="0" dependsOnT="0" simulationFunctionName="evtdly4" simulationFunctionType="C_OR_FORTRAN" style="">
                 <ScilabString as="exprs" height="2" width="1">
-                  <data line="0" column="0" value="0.001"/>
+                  <data line="0" column="0" value="0.0001"/>
                   <data line="1" column="0" value="0"/>
                 </ScilabString>
                 <ScilabDouble as="realParameters" height="1" width="2">
-                  <data line="0" column="0" realPart="0.001"/>
+                  <data line="0" column="0" realPart="1.0E-4"/>
                   <data line="0" column="1" realPart="0.0"/>
                 </ScilabDouble>
                 <ScilabDouble as="integerParameters" height="0" width="0"/>
@@ -644,10 +644,10 @@
               <ExplicitOutputPort id="-29bf49e9:160e22701e2:-7efb" parent="-29bf49e9:160e22701e2:-7eff" ordering="1" dataType="REAL_MATRIX" dataColumns="-2" dataLines="-1" initialState="0.0" style="ExplicitOutputPort;align=right;verticalAlign=middle;spacing=10.0"/>
               <BasicBlock id="-29bf49e9:160e22701e2:-7efa" parent="-29bf49e9:160e22701e4:-7f27" interfaceFunctionName="GAINBLK" blockType="c" dependsOnU="1" dependsOnT="0" simulationFunctionName="gainblk" simulationFunctionType="C_OR_FORTRAN" style="">
                 <ScilabString as="exprs" height="1" width="1">
-                  <data line="0" column="0" value="5"/>
+                  <data line="0" column="0" value="2"/>
                 </ScilabString>
                 <ScilabDouble as="realParameters" height="1" width="1">
-                  <data line="0" column="0" realPart="5.0"/>
+                  <data line="0" column="0" realPart="2.0"/>
                 </ScilabDouble>
                 <ScilabDouble as="integerParameters" height="0" width="0"/>
                 <Array as="objectsParameters" scilabClass="ScilabList"/>
@@ -686,10 +686,10 @@
               <ExplicitOutputPort id="-29bf49e9:160e22701e2:-7ef5" parent="-29bf49e9:160e22701e2:-7ef7" ordering="1" dataType="REAL_MATRIX" dataColumns="-2" dataLines="-1" initialState="0.0" style="ExplicitOutputPort;align=right;verticalAlign=middle;spacing=10.0"/>
               <BasicBlock id="-29bf49e9:160e22701e2:-7ef4" parent="-29bf49e9:160e22701e4:-7f27" interfaceFunctionName="GAINBLK" blockType="c" dependsOnU="1" dependsOnT="0" simulationFunctionName="gainblk" simulationFunctionType="C_OR_FORTRAN" style="">
                 <ScilabString as="exprs" height="1" width="1">
-                  <data line="0" column="0" value="5"/>
+                  <data line="0" column="0" value="1.8"/>
                 </ScilabString>
                 <ScilabDouble as="realParameters" height="1" width="1">
-                  <data line="0" column="0" realPart="5.0"/>
+                  <data line="0" column="0" realPart="1.8"/>
                 </ScilabDouble>
                 <ScilabDouble as="integerParameters" height="0" width="0"/>
                 <Array as="objectsParameters" scilabClass="ScilabList"/>
@@ -709,10 +709,10 @@
               <ExplicitOutputPort id="-29bf49e9:160e22701e2:-7ef2" parent="-29bf49e9:160e22701e2:-7ef4" ordering="1" dataType="REAL_MATRIX" dataColumns="-2" dataLines="-1" initialState="0.0" style="ExplicitOutputPort;align=right;verticalAlign=middle;spacing=10.0"/>
               <BasicBlock id="-29bf49e9:160e22701e2:-7ef1" parent="-29bf49e9:160e22701e4:-7f27" interfaceFunctionName="GAINBLK" blockType="c" dependsOnU="1" dependsOnT="0" simulationFunctionName="gainblk" simulationFunctionType="C_OR_FORTRAN" style="">
                 <ScilabString as="exprs" height="1" width="1">
-                  <data line="0" column="0" value="1"/>
+                  <data line="0" column="0" value="0.3"/>
                 </ScilabString>
                 <ScilabDouble as="realParameters" height="1" width="1">
-                  <data line="0" column="0" realPart="1.0"/>
+                  <data line="0" column="0" realPart="0.3"/>
                 </ScilabDouble>
                 <ScilabDouble as="integerParameters" height="0" width="0"/>
                 <Array as="objectsParameters" scilabClass="ScilabList"/>
@@ -1503,27 +1503,27 @@
       </ExplicitLink>
       <ExplicitLink id="-5d811521:160f1344b7b:-7fe0" parent="0:2:0" source="-29bf49e9:160e22701e2:-7f25" target="-5d811521:160f1344b7b:-7fe4" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="-4.0" y="20.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points"></Array>
-          <mxPoint as="targetPoint" x="4.0" y="4.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
       <ExplicitLink id="-5d811521:160f1344b7b:-7fdf" parent="0:2:0" source="-5d811521:160f1344b7b:-7fe3" target="-45eddd10:15a8b85abef:-7986" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="4.0" y="4.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points"></Array>
-          <mxPoint as="targetPoint" x="44.0" y="20.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
       <ExplicitLink id="-5d811521:160f1344b7b:-7fe6" parent="0:2:0" source="-5d811521:160f1344b7b:-7fe2" target="-78643dd0:160f121a5bc:-7fb2" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="4.0" y="4.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points">
             <mxPoint x="1090.0" y="400.0"/>
             <mxPoint x="1230.0" y="400.0"/>
             <mxPoint x="1230.0" y="590.0"/>
           </Array>
-          <mxPoint as="targetPoint" x="-4.0" y="10.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
       <TextBlock id="-14f41585:159ae7fc998:-6aaa" parent="0:2:0" interfaceFunctionName="TEXT_f" style="TEXT_f;flip=false;mirror=false" value="Servodrehung">
