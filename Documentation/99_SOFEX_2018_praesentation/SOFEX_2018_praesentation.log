@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.12.29)  8 FEB 2018 22:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.12.29)  11 FEB 2018 09:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1191,7 +1191,7 @@ n.toc) [2
 
 ] [4
 
-] <kardan_1.png, id=171, 500.62032pt x 905.63344pt>
+] <kardan_1.png, id=172, 500.62032pt x 905.63344pt>
 File: kardan_1.png Graphic file (type png)
  <use kardan_1.png>
 Package pdftex.def Info: kardan_1.png used on input line 97.
@@ -1199,7 +1199,7 @@ Package pdftex.def Info: kardan_1.png used on input line 97.
 
 [5
 
- <./kardan_1.png>] <motor_1.png, id=199, 875.52094pt x 902.6222pt>
+ <./kardan_1.png>] <motor_1.png, id=200, 875.52094pt x 902.6222pt>
 File: motor_1.png Graphic file (type png)
 
 <use motor_1.png>
@@ -1208,14 +1208,14 @@ Package pdftex.def Info: motor_1.png used on input line 101.
  [6
 
  <./motor_1.png>]
-<servo_1.png, id=226, 761.09344pt x 884.55469pt>
+<servo_1.png, id=227, 761.09344pt x 884.55469pt>
 File: servo_1.png Graphic file (type png)
  <use servo_1.png>
 Package pdftex.def Info: servo_1.png used on input line 105.
 (pdftex.def)             Requested size: 183.60684pt x 213.39566pt.
  [7
 
- <./servo_1.png>] <servo_2.png, id=255, 953.81343pt x 842.39719pt>
+ <./servo_1.png>] <servo_2.png, id=256, 953.81343pt x 842.39719pt>
 File: servo_2.png Graphic file (type png)
  <use servo_2.png>
 Package pdftex.def Info: servo_2.png used on input line 109.
@@ -1223,7 +1223,7 @@ Package pdftex.def Info: servo_2.png used on input line 109.
 
 [8
 
- <./servo_2.png>] <servo_3.png, id=282, 571.38469pt x 877.02657pt>
+ <./servo_2.png>] <servo_3.png, id=283, 571.38469pt x 877.02657pt>
 File: servo_3.png Graphic file (type png)
 
 <use servo_3.png>
@@ -1232,7 +1232,7 @@ Package pdftex.def Info: servo_3.png used on input line 113.
  [9
 
  <./servo_3.png>]
-<struktur_1.png, id=309, 405.76593pt x 944.7797pt>
+<struktur_1.png, id=310, 405.76593pt x 944.7797pt>
 File: struktur_1.png Graphic file (type png)
  <use struktur_1.png>
 Package pdftex.def Info: struktur_1.png used on input line 117.
@@ -1240,7 +1240,7 @@ Package pdftex.def Info: struktur_1.png used on input line 117.
 
 [10
 
- <./struktur_1.png>] <elektronik_1.png, id=336, 577.40718pt x 908.64468pt>
+ <./struktur_1.png>] <elektronik_1.png, id=337, 577.40718pt x 908.64468pt>
 File: elektronik_1.png Graphic file (type png)
 
 <use elektronik_1.png>
@@ -1249,7 +1249,7 @@ Package pdftex.def Info: elektronik_1.png used on input line 121.
  [11
 
  <./elektronik_1.png>]
-<elektronik_2.png, id=364, 973.38657pt x 708.39656pt>
+<elektronik_2.png, id=365, 973.38657pt x 708.39656pt>
 File: elektronik_2.png Graphic file (type png)
  <use elektronik_2.png>
 Package pdftex.def Info: elektronik_2.png used on input line 125.
@@ -1257,7 +1257,7 @@ Package pdftex.def Info: elektronik_2.png used on input line 125.
 
 [12
 
- <./elektronik_2.png>] <struktur_2.png, id=390, 399.74344pt x 929.72343pt>
+ <./elektronik_2.png>] <struktur_2.png, id=391, 399.74344pt x 929.72343pt>
 File: struktur_2.png Graphic file (type png)
 
 <use struktur_2.png>
@@ -1268,21 +1268,21 @@ Package pdftex.def Info: struktur_2.png used on input line 129.
  <./struktur_2.png>] [14
 
 ]
-<model.png, id=442, 1270.7475pt x 438.63875pt>
+<model.png, id=443, 1270.7475pt x 438.63875pt>
 File: model.png Graphic file (type png)
  <use model.png>
 Package pdftex.def Info: model.png used on input line 162.
 (pdftex.def)             Requested size: 342.43532pt x 118.19978pt.
  [15
 
- <./model.png>] <naeherung.png, id=473, 740.7675pt x 1108.14pt>
+ <./model.png>] <naeherung.png, id=474, 740.7675pt x 1108.14pt>
 File: naeherung.png Graphic file (type png)
  <use naeherung.png>
 Package pdftex.def Info: naeherung.png used on input line 166.
 (pdftex.def)             Requested size: 142.64621pt x 213.39566pt.
  [16
 
- <./naeherung.png (PNG copy)>] <alpha_gamma.png, id=499, 612.2875pt x 461.725pt
+ <./naeherung.png (PNG copy)>] <alpha_gamma.png, id=500, 612.2875pt x 461.725pt
 >
 File: alpha_gamma.png Graphic file (type png)
 
@@ -1310,6 +1310,8 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 ] [21
 
+] [22
+
 ]
 \tf@nav=\write6
 \openout6 = `SOFEX_2018_praesentation.nav'.
@@ -1320,22 +1322,22 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@snm=\write8
 \openout8 = `SOFEX_2018_praesentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 230.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 230.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 241.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 241.
 
 (./SOFEX_2018_praesentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 230.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 230.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 241.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 241.
 Package rerunfilecheck Info: File `SOFEX_2018_praesentation.out' has not change
 d.
 (rerunfilecheck)             Checksum: 0A1F5C437C8669ABD4A940F391089445;267.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 230.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 241.
  ) 
 Here is how much of TeX's memory you used:
- 23004 strings out of 493304
- 445201 string characters out of 6139870
+ 23008 strings out of 493304
+ 445236 string characters out of 6139870
  557911 words of memory out of 5000000
- 25816 multiletter control sequences out of 15000+600000
+ 25818 multiletter control sequences out of 15000+600000
  80732 words of font info for 70 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  49i,16n,60p,413b,688s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1350,10 +1352,10 @@ hare/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/publi
 c/lm/lmri7.pfb></usr/share/texmf/fonts/type1/public/lm/lmri8.pfb></usr/share/te
 xmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lm
 sy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on SOFEX_2018_praesentation.pdf (21 pages, 634938 bytes).
+Output written on SOFEX_2018_praesentation.pdf (22 pages, 636885 bytes).
 PDF statistics:
- 704 PDF objects out of 1000 (max. 8388607)
- 634 compressed objects within 7 object streams
- 49 named destinations out of 1000 (max. 500000)
+ 730 PDF objects out of 1000 (max. 8388607)
+ 659 compressed objects within 7 object streams
+ 51 named destinations out of 1000 (max. 500000)
  187 words of extra memory for PDF output out of 10000 (max. 10000000)
 
