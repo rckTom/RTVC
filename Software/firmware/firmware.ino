@@ -3,18 +3,18 @@
 #include <Wire.h>
 
 // define constants
-#define Servo_X_pin 5
-#define Servo_Y_pin 6
+#define Servo_X_pin 6
+#define Servo_Y_pin 5
 // neutral positions of servos in microseconds
 // see "servo_set_via_serial.ino"
-#define Servo_X_mid 1500
-#define Servo_Y_mid 1500
+#define Servo_X_mid 1580
+#define Servo_Y_mid 1380
 // factor for transforming desired motor angle to servo signal microseconds
 // 13.33 µs per degree of servo movement
 #define k_u_phi_x 21.33 // X axis, 1.6° servo per 1° motor
 #define k_u_phi_y 33.33 // Y axis, 2.5° servo per 1° motor
 
-#define Eject_pin 12 // to connect the ejection charge to
+#define Eject_pin 7 // to connect the ejection charge to
 #define LED_pin 13 // for debugging purposes on the ground
 
 // Kalman filter error covariances
@@ -97,17 +97,19 @@ bool intr = false; // set to true by interrupt, act on by loop()
 int ovf_ct = 0; // keep track of how often interrupt overflowed
 
 void setup() {
-  Serial.begin(115200);
+  // define ejection charge pin as output
+  pinMode(Eject_pin, OUTPUT);
+  pinMode(Eject_pin, LOW);
+  pinMode(LED_pin, OUTPUT);
+  digitalWrite(LED_pin, LOW);
+
+  /* Serial.begin(115200);
   Serial.println("RTVC firmware 2018-01-14");
-  Serial.println("Determining sensor bias and variance ...");
+  Serial.println("Determining sensor bias and variance ..."); */
   
   // attach two servos for x and y axis
   servo_x.attach(Servo_X_pin, 900, 2100);
   servo_y.attach(Servo_Y_pin, 900, 2100);
-
-  // define ejection charge pin as output
-  pinMode(Eject_pin, OUTPUT);
-  pinMode(LED_pin, OUTPUT);
 
   // attach sensors over I2C and set measuring ranges
   gy80.begin();
@@ -121,52 +123,50 @@ void setup() {
 }
 
 void on_ramp() {
-  old_mu_accel_z = mu_accel_z;
-  old_mu_gyro_x = mu_gyro_x;
-  old_mu_gyro_y = mu_gyro_y;
-
-  n_meas++;
-  
   accel = gy80.a_read_scaled();
   gyro_rates = gy80.g_read_scaled();
 
-  mu_sum_accel_z += accel.z;
-  mu_accel_z = mu_sum_accel_z / n_meas;
-  var_sum_accel_z += (accel.z - mu_accel_z) * (accel.z - old_mu_accel_z);
+  if(n_meas < 32000) {
+    old_mu_accel_z = mu_accel_z;
+    old_mu_gyro_x = mu_gyro_x;
+    old_mu_gyro_y = mu_gyro_y;
 
-  if(abs(gyro_rates.x)>3.0) {
-    n_x_meas++;
-    mu_sum_gyro_x += old_mu_gyro_x;
-    mu_gyro_x = mu_sum_gyro_x / n_meas;
-    var_sum_gyro_x += (old_gyro_x - mu_gyro_x) * (old_gyro_x - old_mu_gyro_x);
-  } else {
-    mu_sum_gyro_x += gyro_rates.x;
-    mu_gyro_x = mu_sum_gyro_x / n_meas;
-    var_sum_gyro_x += (gyro_rates.x - mu_gyro_x) * (gyro_rates.x - old_mu_gyro_x);
-    old_gyro_x = gyro_rates.x;
+    n_meas++;
+  
+    mu_sum_accel_z += accel.z;
+    mu_accel_z = mu_sum_accel_z / n_meas;
+    var_sum_accel_z += (accel.z - mu_accel_z) * (accel.z - old_mu_accel_z);
+
+    if(abs(gyro_rates.x)>3.0) {
+      n_x_meas++;
+      mu_sum_gyro_x += old_mu_gyro_x;
+      mu_gyro_x = mu_sum_gyro_x / n_meas;
+      var_sum_gyro_x += (old_gyro_x - mu_gyro_x) * (old_gyro_x - old_mu_gyro_x);
+    } else {
+      mu_sum_gyro_x += gyro_rates.x;
+      mu_gyro_x = mu_sum_gyro_x / n_meas;
+      var_sum_gyro_x += (gyro_rates.x - mu_gyro_x) * (gyro_rates.x - old_mu_gyro_x);
+      old_gyro_x = gyro_rates.x;
+    }
+  
+    mu_sum_gyro_y += gyro_rates.y;
+    mu_gyro_y = mu_sum_gyro_y / n_meas;
+    var_sum_gyro_y += (gyro_rates.y - mu_gyro_y) * (gyro_rates.y - old_mu_gyro_y);
+
+    min_accel_z = min(min_accel_z, accel.z);
+    max_accel_z = max(max_accel_z, accel.z);
+    min_gyro_x = min(min_gyro_x, gyro_rates.x);
+    max_gyro_x = max(max_gyro_x, gyro_rates.x);
+    min_gyro_y = min(min_gyro_y, gyro_rates.y);
+    max_gyro_y = max(max_gyro_y, gyro_rates.y);
   }
   
-  mu_sum_gyro_y += gyro_rates.y;
-  mu_gyro_y = mu_sum_gyro_y / n_meas;
-  var_sum_gyro_y += (gyro_rates.y - mu_gyro_y) * (gyro_rates.y - old_mu_gyro_y);
-
-  min_accel_z = min(min_accel_z, accel.z);
-  max_accel_z = max(max_accel_z, accel.z);
-  min_gyro_x = min(min_gyro_x, gyro_rates.x);
-  max_gyro_x = max(max_gyro_x, gyro_rates.x);
-  min_gyro_y = min(min_gyro_y, gyro_rates.y);
-  max_gyro_y = max(max_gyro_y, gyro_rates.y);
-  
-  if(n_meas >= 1000) { current_state = RECOVERY; }
-  // DRAGONS
-
   if(accel.z > 20.0) { 
     digitalWrite(LED_pin, HIGH);
     // Serial.println("Launch detected!");
     // Serial.print("Assumed avg. acceleration at rest: ");
     // Serial.println(mu_accel_z);
     current_state = IN_FLIGHT;
-    n_meas = 0;
   }
   
   intr = false;
@@ -177,10 +177,6 @@ void in_flight() {
   gyro_rates = gy80.g_read_scaled();
 
   // predict and correct altitude state
-  /* not sure why mu_accel_z has to be subtracted from accel.z before
-     multiplication with K_accel, but numerical studies show that otherwise
-     the acceleration state would remain at a value too low, 
-     thus underestimating altitude */
   h = h + delta_t * v + 0.5 * delta_t * delta_t * a;
   h_max = max(h, h_max);
   v = v + delta_t * a;
@@ -199,6 +195,7 @@ void in_flight() {
   e_gamma_x += gamma_x * delta_t;
   u_x = K_P * gamma_x + K_I * e_gamma_x + K_D * gamma_x_dot;
   phi_x = (int)(Servo_X_mid + u_x * k_u_phi_x);
+  phi_x = constrain(phi_x, 1100, 1900);
   servo_x.write(phi_x);
 
   // predict and correct rotation around Y axis
@@ -214,27 +211,21 @@ void in_flight() {
   e_gamma_y =+ gamma_y * delta_t;
   u_y = K_P * gamma_y + K_I * e_gamma_y + K_D * gamma_y_dot;
   phi_y = (int)(Servo_Y_mid + u_y * k_u_phi_y);
+  phi_y = constrain(phi_y, 1100, 1900);
   servo_y.write(phi_y);
 
-  // if launch is detected and altitude is at least 10 m, 
+  // if launch is detected and altitude is at least 5 m, 
   // but velocity is negative, assume apogee
-  // DRAGONS
-  if(h>=1.0 && v<0.0) {
+  if(h>=5.0 && v<0.0) {
     current_state = RECOVERY;
   }
 
   // if rotation around any axis is greater than 90°
   // assume malfunction and eject parachute
-  // DRAGONS
   if(abs(gamma_x) > 90 || abs(gamma_y) > 90) {
     current_state = RECOVERY;
   }
 
-  n_meas++;
-  if(n_meas > 300) {
-    current_state = RECOVERY;
-  }
-  
   intr = false;
 }
 
@@ -242,8 +233,8 @@ void recovery() {
   byte LED_on = 0;
 
   // eject parachute when reaching this state
-  // DRAGONS digitalWrite(Eject_pin, HIGH); 
-  Serial.println("Parachute ejected!");
+  digitalWrite(Eject_pin, HIGH); 
+  /* Serial.println("Parachute ejected!");
   Serial.print("Maximum altitude: ");
   Serial.println(h_max);
   Serial.print("Current altitude: ");
@@ -253,7 +244,7 @@ void recovery() {
   Serial.print("Current X axis angle: ");
   Serial.println(gamma_x);
   Serial.print("Current Y axis angle: ");
-  Serial.println(gamma_y);
+  Serial.println(gamma_y); */
   delay(1000);
   digitalWrite(Eject_pin, LOW);
   digitalWrite(LED_pin, LED_on);
@@ -263,7 +254,7 @@ void recovery() {
   servo_y.write(Servo_Y_mid);
 
   // output or blink or whatever ...
-  Serial.print("Acceleration mean: ");
+  /* Serial.print("Acceleration mean: ");
   Serial.println(mu_accel_z);
   Serial.print("Acceleration variance (*1000): ");
   Serial.println(var_sum_accel_z / n_meas * 1000.0);
@@ -288,7 +279,7 @@ void recovery() {
   Serial.print("Gyro rate Y range: ");
   Serial.print(min_gyro_y);
   Serial.print("   ");
-  Serial.println(max_gyro_y);
+  Serial.println(max_gyro_y); */
   while(1) {
     // wait forever and blink LED
     delay(1000);
