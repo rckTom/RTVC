@@ -1,0 +1,325 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "0",
+                    "typeID": "AndroidPhone",
+                    "zOrder": "0",
+                    "measuredW": "356",
+                    "measuredH": "725",
+                    "x": "501",
+                    "y": "58",
+                    "properties": {
+                        "resizing": "stretch"
+                    }
+                },
+                {
+                    "ID": "1",
+                    "typeID": "LineOfText",
+                    "zOrder": "1",
+                    "measuredW": "200",
+                    "measuredH": "27",
+                    "x": "531",
+                    "y": "171"
+                },
+                {
+                    "ID": "3",
+                    "typeID": "CircleButton",
+                    "zOrder": "2",
+                    "w": "35",
+                    "h": "35",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "796",
+                    "y": "167",
+                    "properties": {
+                        "icon": {
+                            "ID": "arrow-left",
+                            "size": "small"
+                        }
+                    }
+                },
+                {
+                    "ID": "20",
+                    "typeID": "Accordion",
+                    "zOrder": "3",
+                    "w": "318",
+                    "h": "260",
+                    "measuredW": "150",
+                    "measuredH": "186",
+                    "x": "520",
+                    "y": "208",
+                    "properties": {
+                        "text": "Servo 2",
+                        "size": "16",
+                        "selectedIndex": "0",
+                        "italic": "false"
+                    }
+                },
+                {
+                    "ID": "46",
+                    "typeID": "Label",
+                    "zOrder": "4",
+                    "measuredW": "87",
+                    "measuredH": "24",
+                    "x": "532",
+                    "y": "363",
+                    "properties": {
+                        "text": "Proportional",
+                        "size": "16",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "48",
+                    "typeID": "Label",
+                    "zOrder": "6",
+                    "measuredW": "66",
+                    "measuredH": "21",
+                    "x": "678",
+                    "y": "364",
+                    "properties": {
+                        "text": "per degree",
+                        "size": "13",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "49",
+                    "typeID": "Label",
+                    "zOrder": "7",
+                    "measuredW": "32",
+                    "measuredH": "24",
+                    "x": "532",
+                    "y": "330",
+                    "properties": {
+                        "text": "Axis",
+                        "size": "16",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "50",
+                    "typeID": "NumericStepper",
+                    "zOrder": "8",
+                    "w": "42",
+                    "measuredW": "42",
+                    "measuredH": "24",
+                    "x": "632",
+                    "y": "330",
+                    "properties": {
+                        "text": "X",
+                        "state": "up"
+                    }
+                },
+                {
+                    "ID": "51",
+                    "typeID": "Label",
+                    "zOrder": "9",
+                    "measuredW": "56",
+                    "measuredH": "24",
+                    "x": "531",
+                    "y": "396",
+                    "properties": {
+                        "text": "Integral",
+                        "size": "16",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "53",
+                    "typeID": "Label",
+                    "zOrder": "11",
+                    "measuredW": "113",
+                    "measuredH": "21",
+                    "x": "677",
+                    "y": "398",
+                    "properties": {
+                        "text": "per degree-second",
+                        "size": "13",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "54",
+                    "typeID": "Label",
+                    "zOrder": "12",
+                    "measuredW": "71",
+                    "measuredH": "24",
+                    "x": "531",
+                    "y": "428",
+                    "properties": {
+                        "text": "Derivative",
+                        "size": "16",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "56",
+                    "typeID": "Label",
+                    "zOrder": "14",
+                    "measuredW": "114",
+                    "measuredH": "21",
+                    "x": "677",
+                    "y": "431",
+                    "properties": {
+                        "text": "per degree/second",
+                        "size": "13",
+                        "color": "0"
+                    }
+                },
+                {
+                    "ID": "57",
+                    "typeID": "TextInput",
+                    "zOrder": "5",
+                    "w": "42",
+                    "measuredW": "23",
+                    "measuredH": "27",
+                    "x": "632",
+                    "y": "362",
+                    "properties": {
+                        "text": "2",
+                        "state": "up",
+                        "align": "right"
+                    }
+                },
+                {
+                    "ID": "58",
+                    "typeID": "TextInput",
+                    "zOrder": "10",
+                    "w": "43",
+                    "measuredW": "30",
+                    "measuredH": "27",
+                    "x": "631",
+                    "y": "395",
+                    "properties": {
+                        "text": "0.1",
+                        "state": "up",
+                        "align": "right"
+                    }
+                },
+                {
+                    "ID": "59",
+                    "typeID": "TextInput",
+                    "zOrder": "13",
+                    "w": "43",
+                    "measuredW": "20",
+                    "measuredH": "27",
+                    "x": "631",
+                    "y": "428",
+                    "properties": {
+                        "text": "1",
+                        "state": "up",
+                        "align": "right"
+                    }
+                },
+                {
+                    "ID": "60",
+                    "typeID": "Icon",
+                    "zOrder": "15",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "583",
+                    "y": "285",
+                    "properties": {
+                        "icon": {
+                            "ID": "exclamation-circle",
+                            "size": "medium"
+                        },
+                        "color": "13369344"
+                    }
+                },
+                {
+                    "ID": "62",
+                    "typeID": "Paragraph",
+                    "zOrder": "16",
+                    "w": "154",
+                    "h": "40",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "621",
+                    "y": "281",
+                    "properties": {
+                        "text": "Use only if you know\nwhat you are doing!",
+                        "size": "16",
+                        "color": "13369344"
+                    }
+                },
+                {
+                    "ID": "63",
+                    "typeID": "Button",
+                    "zOrder": "17",
+                    "w": "296",
+                    "h": "48",
+                    "measuredW": "147",
+                    "measuredH": "27",
+                    "x": "531",
+                    "y": "477",
+                    "properties": {
+                        "text": "Upload Settings",
+                        "color": "7317724",
+                        "size": "16",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "64",
+                    "typeID": "Alert",
+                    "zOrder": "18",
+                    "measuredW": "226",
+                    "measuredH": "149",
+                    "x": "244",
+                    "y": "479",
+                    "properties": {
+                        "text": "No flight computer connected!\nNo suitable device could be found connected to the USB port. Please connect your flight computer and try again.\nOK"
+                    }
+                },
+                {
+                    "ID": "66",
+                    "typeID": "Switch",
+                    "zOrder": "19",
+                    "measuredW": "42",
+                    "measuredH": "24",
+                    "x": "791",
+                    "y": "212",
+                    "properties": {
+                        "onOffState": "on"
+                    }
+                },
+                {
+                    "ID": "67",
+                    "typeID": "ComboBox",
+                    "zOrder": "20",
+                    "w": "217",
+                    "measuredW": "177",
+                    "measuredH": "24",
+                    "x": "606",
+                    "y": "250",
+                    "properties": {
+                        "text": "Attitude control Axis/PID",
+                        "verticalScrollbar": "false"
+                    }
+                },
+                {
+                    "ID": "68",
+                    "typeID": "Label",
+                    "zOrder": "21",
+                    "measuredW": "70",
+                    "measuredH": "24",
+                    "x": "532",
+                    "y": "250",
+                    "properties": {
+                        "text": "Operation",
+                        "size": "16"
+                    }
+                }
+            ]
+        },
+        "mockupH": "725",
+        "mockupW": "613",
+        "measuredW": "857",
+        "measuredH": "783",
+        "version": "1.0"
+    }
+}

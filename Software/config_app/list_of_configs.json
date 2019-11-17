@@ -1,0 +1,348 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "0",
+                    "typeID": "AndroidPhone",
+                    "zOrder": "0",
+                    "measuredW": "356",
+                    "measuredH": "725",
+                    "x": "490",
+                    "y": "55",
+                    "properties": {
+                        "resizing": "stretch"
+                    }
+                },
+                {
+                    "ID": "2",
+                    "typeID": "LineOfText",
+                    "zOrder": "1",
+                    "measuredW": "200",
+                    "measuredH": "27",
+                    "x": "524",
+                    "y": "170"
+                },
+                {
+                    "ID": "3",
+                    "typeID": "HRule",
+                    "zOrder": "2",
+                    "w": "319",
+                    "measuredW": "100",
+                    "measuredH": "10",
+                    "x": "508",
+                    "y": "203"
+                },
+                {
+                    "ID": "4",
+                    "typeID": "CircleButton",
+                    "zOrder": "3",
+                    "w": "35",
+                    "h": "35",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "785",
+                    "y": "166",
+                    "properties": {
+                        "icon": {
+                            "ID": "plus",
+                            "size": "small"
+                        }
+                    }
+                },
+                {
+                    "ID": "6",
+                    "typeID": "Icon",
+                    "zOrder": "4",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "787",
+                    "y": "213",
+                    "properties": {
+                        "icon": {
+                            "ID": "ellipsis-h",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "7",
+                    "typeID": "HRule",
+                    "zOrder": "5",
+                    "w": "319",
+                    "measuredW": "100",
+                    "measuredH": "10",
+                    "x": "508",
+                    "y": "373"
+                },
+                {
+                    "ID": "8",
+                    "typeID": "HRule",
+                    "zOrder": "6",
+                    "w": "319",
+                    "measuredW": "100",
+                    "measuredH": "10",
+                    "x": "508",
+                    "y": "331"
+                },
+                {
+                    "ID": "9",
+                    "typeID": "HRule",
+                    "zOrder": "7",
+                    "w": "319",
+                    "measuredW": "100",
+                    "measuredH": "10",
+                    "x": "508",
+                    "y": "287"
+                },
+                {
+                    "ID": "10",
+                    "typeID": "HRule",
+                    "zOrder": "8",
+                    "w": "319",
+                    "measuredW": "100",
+                    "measuredH": "10",
+                    "x": "508",
+                    "y": "245"
+                },
+                {
+                    "ID": "12",
+                    "typeID": "Icon",
+                    "zOrder": "9",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "787",
+                    "y": "297",
+                    "properties": {
+                        "icon": {
+                            "ID": "ellipsis-h",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "13",
+                    "typeID": "Icon",
+                    "zOrder": "10",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "787",
+                    "y": "255",
+                    "properties": {
+                        "icon": {
+                            "ID": "ellipsis-h",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "14",
+                    "typeID": "Icon",
+                    "zOrder": "11",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "787",
+                    "y": "341",
+                    "properties": {
+                        "icon": {
+                            "ID": "ellipsis-h",
+                            "size": "medium"
+                        },
+                        "color": "2848996"
+                    }
+                },
+                {
+                    "ID": "15",
+                    "typeID": "Label",
+                    "zOrder": "12",
+                    "measuredW": "98",
+                    "measuredH": "24",
+                    "x": "530",
+                    "y": "216",
+                    "properties": {
+                        "text": "Black Brant X",
+                        "size": "16"
+                    }
+                },
+                {
+                    "ID": "16",
+                    "typeID": "Label",
+                    "zOrder": "13",
+                    "measuredW": "22",
+                    "measuredH": "24",
+                    "x": "530",
+                    "y": "258",
+                    "properties": {
+                        "text": "A4",
+                        "size": "16"
+                    }
+                },
+                {
+                    "ID": "17",
+                    "typeID": "Label",
+                    "zOrder": "14",
+                    "measuredW": "57",
+                    "measuredH": "24",
+                    "x": "532",
+                    "y": "344",
+                    "properties": {
+                        "text": "Phoenix",
+                        "size": "16"
+                    }
+                },
+                {
+                    "ID": "18",
+                    "typeID": "Label",
+                    "zOrder": "15",
+                    "measuredW": "85",
+                    "measuredH": "24",
+                    "x": "532",
+                    "y": "300",
+                    "properties": {
+                        "text": "Nike Smoke",
+                        "size": "16"
+                    }
+                },
+                {
+                    "ID": "19",
+                    "typeID": "List",
+                    "zOrder": "16",
+                    "w": "86",
+                    "h": "54",
+                    "measuredW": "100",
+                    "measuredH": "126",
+                    "x": "733",
+                    "y": "367",
+                    "properties": {
+                        "text": "Rename\nDelete"
+                    }
+                },
+                {
+                    "ID": "24",
+                    "typeID": "Icon",
+                    "zOrder": "17",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "224",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-down",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "25",
+                    "typeID": "Icon",
+                    "zOrder": "18",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "214",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-up",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "26",
+                    "typeID": "Icon",
+                    "zOrder": "19",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "266",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-down",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "27",
+                    "typeID": "Icon",
+                    "zOrder": "20",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "256",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-up",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "28",
+                    "typeID": "Icon",
+                    "zOrder": "21",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "308",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-down",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "29",
+                    "typeID": "Icon",
+                    "zOrder": "22",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "298",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-up",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "30",
+                    "typeID": "Icon",
+                    "zOrder": "23",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "352",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-down",
+                            "size": "xsmall"
+                        }
+                    }
+                },
+                {
+                    "ID": "31",
+                    "typeID": "Icon",
+                    "zOrder": "24",
+                    "measuredW": "16",
+                    "measuredH": "16",
+                    "x": "514",
+                    "y": "342",
+                    "properties": {
+                        "icon": {
+                            "ID": "caret-up",
+                            "size": "xsmall"
+                        }
+                    }
+                }
+            ]
+        },
+        "mockupH": "725",
+        "mockupW": "356",
+        "measuredW": "846",
+        "measuredH": "780",
+        "version": "1.0"
+    }
+}

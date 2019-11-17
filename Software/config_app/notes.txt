@@ -1,0 +1,1 @@
+See https://www.instructables.com/id/Arduin-Adroid-USB-Serial-Communication/ on how to connect a USB-host capable Android phone to an Arduino
