@@ -1,0 +1,18 @@
+Flash           Arduino
+1 SI            D11 MOSI
+2 SCK           D13 SCK
+3 !RESET        D8
+4 !CS           D10 SS
+5 !WP           D7
+6 VCC           3V3
+7 GND           GND
+8 SO            D12 MISO
+
+evtl. Pull-up-Widerstände von etwa 10kOhm an der MOSI/SI- und MISO/SO-Leitung des SPI-Interfaces. Die Ausgänge hier sind meist als Open-Collector oder Open-Drain aufgebaut, so dass diese Widerstände für die entsprechende Funktion oder Geschwindigkeitsverbesserung notwendig sind.
+
+SPI scheint jetzt zu laufen. Frequenz so tief wie möglich
+runtergefahren, Pullup an CS-Pin, und ich kann locker alle 8 ms einen
+Wert auslesen und im Flash speichern. Deutlich drunter werde ich wohl
+nicht gehen können, aber um die Bewegung eines Servos nachzuvollziehen
+sollte das reichen. Diagramme sehen schon gut aus ;-)
+-> 10k zwischen 3,3 V und CS scheint zu gehen

@@ -22,6 +22,8 @@ def random_orientation(theta_min, theta_max):
     z = np.random.random()
     d = np.sqrt(x*x + y*y + z*z)
     theta = theta_min + (theta_max - theta_min)*np.random.random()
+    print("axis:", x/d, y/d, z/d)
+    print("angle:", theta)
     return from_axis(theta, np.array([x/d, y/d, z/d]))
 
 """
@@ -29,7 +31,7 @@ we have a known orientation quaternion of the rocket in the world frame
 we know the rocket frame's x axis orientation
 we would like to know the angle that the rocket has to rotate around this axis such that the y axis lies in the world (x,y) plane again
 and the same for the x axis rotating around the y axis to lie in the (x,y) plane again
-1. rotate point (1,0,0) with orientation quaternion p' = q p q⁻¹
+1. rotate point p = (1,0,0) with orientation quaternion p' = q p q⁻¹
 2. determine angle to z-axis as alpha = arccos(p'.z)
     can be linearized around pi/2 (cos crosses 0 here) using
         arccos(x) ~= pi/2 - x
@@ -56,9 +58,13 @@ ax = fig.add_subplot(111, projection='3d')
 plot_world_coord(ax)
 
 r = random_orientation(-0.26, 0.26)
+print("r:", r)
 x = r * np.quaternion(0, 1, 0, 0) * r.conj()
 y = r * np.quaternion(0, 0, 1, 0) * r.conj()
 z = r * np.quaternion(0, 0, 0, 1) * r.conj()
+print("x:", x)
+print("y:", y)
+print("z:", z)
 axes = np.array([[[0,x.x],[0,x.y],[0,x.z]],
                  [[0,y.x],[0,y.y],[0,y.z]],
                  [[0,z.x],[0,z.y],[0,z.z]]])
@@ -66,6 +72,8 @@ plot_rocket_coord(ax, axes)
 
 a_x = x.z * 180 / np.pi
 a_y = y.z * 180 / np.pi
+print("Linearized angle for x:", a_x)
+print("Linearized angle for y:", a_y)
 ax.text((1.0+x.x)/2, (0.0+x.y)/2, (0.0+x.z)/2, "{:1.1f}°".format(a_x), None)
 ax.text((0.0+y.x)/2, (1.0+y.y)/2, (0.0+y.z)/2, "{:1.1f}°".format(a_y), None)
 
