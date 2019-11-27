@@ -1,0 +1,8 @@
+connect
+
+Arduino	MPU6050
++5V		VCC
+GND		GND
+A4		SDA
+A5		SCL
+D2		INT

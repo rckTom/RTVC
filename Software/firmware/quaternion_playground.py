@@ -22,6 +22,8 @@ def random_orientation(theta_min, theta_max):
     z = np.random.random()
     d = np.sqrt(x*x + y*y + z*z)
     theta = theta_min + (theta_max - theta_min)*np.random.random()
+    print("axis:", x/d, y/d, z/d)
+    print("angle:", theta)
     return from_axis(theta, np.array([x/d, y/d, z/d]))
 
 def random_orientation_from_cone(half_angle):
@@ -38,7 +40,7 @@ we have a known orientation quaternion of the rocket in the world frame
 we know the rocket frame's x axis orientation
 we would like to know the angle that the rocket has to rotate around this axis such that the y axis lies in the world (x,y) plane again
 and the same for the x axis rotating around the y axis to lie in the (x,y) plane again
-1. rotate point (1,0,0) with orientation quaternion p' = q p q⁻¹
+1. rotate point p = (1,0,0) with orientation quaternion p' = q p q⁻¹
 2. determine angle to z-axis as alpha = arccos(p'.z)
     can be linearized around pi/2 (cos crosses 0 here) using
         arccos(x) ~= pi/2 - x
