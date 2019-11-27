@@ -3,14 +3,17 @@ from scipy.optimize import minimize
 import matplotlib.pyplot as plt
 import math
 
-plt.figure(figsize=(10,10))
+# plt.figure(figsize=(10,10))
 
 MMT_RADIUS = 10.0
-EXTEND_MMT = 2.0
+EXTEND_MMT = 2.0 # how far attachment point extends beyond MMT radius
 WIRE_LENGTH = 12.0
 SERVO_ARM_LENGTH = 12.0
-DESIRED_RANGE = 6.2
-CORRECTION = 1.3
+DESIRED_RANGE = 6.2 # distance of MMT center from axis (results in square coverage area with 2*DESIRED_RANGE as side length
+CORRECTION = 1.3 # moving servo axis to bottom right so square area around center of MMT can be covered
+
+# x points right
+# y points down
 
 # servo 0
 x0 = -WIRE_LENGTH + CORRECTION                                  # position
@@ -66,24 +69,20 @@ def intersect_circles(c0, r0, c1, r1):
     c3yb = c2y + h * (c1x - c0x) / d
     return ((c3xa, c3ya), (c3xb, c3yb))
 
-def get_angle(p0, p1):
+def get_angle(p0, p1): # since y axis points down, 0° points right, but angle increases clockwise!
     return math.atan2(p1[1]-p0[1], p1[0]-p0[0])
 
 coords = []
 for i in range(-10, 11, 1):
-    coords.append((-DESIRED_RANGE,     i*DESIRED_RANGE/10.0))
-    coords.append((-DESIRED_RANGE/2.0, i*DESIRED_RANGE/10.0))
-    coords.append(( 0.0,               i*DESIRED_RANGE/10.0))
-    coords.append(( DESIRED_RANGE/2.0, i*DESIRED_RANGE/10.0))
-    coords.append(( DESIRED_RANGE,     i*DESIRED_RANGE/10.0))
-    # coords.append((i*DESIRED_RANGE/10.0, -DESIRED_RANGE))
-    # coords.append((i*DESIRED_RANGE/10.0,  0.0))
-    # coords.append((i*DESIRED_RANGE/10.0,  DESIRED_RANGE))
+    for j in range(-10, 11, 1):
+        coords.append((i*DESIRED_RANGE/10.0, j*DESIRED_RANGE/10.0))
 
 min_ai0 = math.pi / 2.0
 max_ai0 = math.pi / 2.0
 min_ai1 = 0.0
 max_ai1 = 0.0
+
+print("coords;ai00;ai01;ai10;ai11")
 
 for c in coords:
     size = 1
@@ -128,21 +127,22 @@ for c in coords:
     ys0 = s0[1]
     xs1 = s1[0]
     ys1 = s1[1]
-    plt.scatter(xs0, -ys0, s=2*size, c='red', marker=marker)
-    plt.scatter(xs1, -ys1, s=2*size, c='red', marker=marker)
-    plt.scatter(cx, -cy, s=2*size, c='green', marker=marker)
-    plt.scatter(xa0, -ya0, s=1*size, c='blue', marker=marker)
-    plt.scatter(xa1, -ya1, s=1*size, c='blue', marker=marker)
-    plt.plot([xs0, xa0], [-ys0, -ya0], color='gray', linewidth=0.5)
-    plt.plot([xs1, xa1], [-ys1, -ya1], color='gray', linewidth=0.5)
+    # plt.scatter(xs0, -ys0, s=2*size, c='red', marker=marker)
+    # plt.scatter(xs1, -ys1, s=2*size, c='red', marker=marker)
+    # plt.scatter(cx, -cy, s=2*size, c='green', marker=marker)
+    # plt.scatter(xa0, -ya0, s=1*size, c='blue', marker=marker)
+    # plt.scatter(xa1, -ya1, s=1*size, c='blue', marker=marker)
+    # plt.plot([xs0, xa0], [-ys0, -ya0], color='gray', linewidth=0.5)
+    # plt.plot([xs1, xa1], [-ys1, -ya1], color='gray', linewidth=0.5)
+    print(c, ";", ai00, ";", ai01, ";", ai10, ";", ai11) 
 
-for i in range(360):
-    x = 24.4 * math.cos(i / 180.0 * math.pi)
-    y = 24.4 * math.sin(i / 180.0 * math.pi)
-    plt.scatter(x, y, s=1, c='gray')
+# for i in range(360):
+    # x = 24.4 * math.cos(i / 180.0 * math.pi)
+    # y = 24.4 * math.sin(i / 180.0 * math.pi)
+    # plt.scatter(x, y, s=1, c='gray')
 
-plt.axes().set_aspect('equal', 'datalim')
-plt.show()
+# plt.axes().set_aspect('equal', 'datalim')
+# plt.show()
 
 print("angles servo 0:", min_ai0 * 180.0 / math.pi, max_ai0 * 180.0 / math.pi)
 print("angles servo 1:", min_ai1 * 180.0 / math.pi, max_ai1 * 180.0 / math.pi)
