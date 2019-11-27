@@ -52,3 +52,6 @@ print([z for z in qpq_min if ('k' in z and not('q' in z or 'r' in z))])
 
 print("\r\nk component for p = (0, 1, 0):")
 print([z for z in qpq_min if ('k' in z and not('p' in z or 'r' in z))])
+
+print("\r\nk component for p = (0, 0, 1):")
+print([z for z in qpq_min if ('k' in z and not('p' in z or 'q' in z))])

@@ -79,6 +79,7 @@ plot_rocket_coord(ax, axes)
 
 print("x.z should be 2xz - 2wy:", x.z, "=", 2*r.x*r.z - 2*r.w*r.y)
 print("y.z should be 2wx + 2yz:", y.z, "=", 2*r.w*r.x + 2*r.y*r.z)
+print("z.z should be w^2 + z^2 - x^2 - y^2:", z.z, "=", r.w*r.w + r.z*r.z - r.x*r.x - r.y*r.y)
 
 a_x = x.z * 180 / np.pi
 a_y = y.z * 180 / np.pi
