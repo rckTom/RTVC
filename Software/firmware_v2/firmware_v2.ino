@@ -39,6 +39,31 @@ void dmpDataReady() {
     mpuInterrupt = true;
 }
 
+// PID controller gains
+#define K_P -2.0 // DRAGONS
+#define K_I -1.8 // DRAGONS
+#define K_D -0.3 // DRAGONS
+
+// mechanical linkage "gain" between desired gain and servo command
+#define K_X_mechanic 1.0
+#define K_Z_mechanic 1.0
+
+float displacementX = 0.0;
+float displacementZ = 0.0;
+float oldDisplacementX = 0.0;
+float oldDisplacementZ = 0.0;
+
+float X_axis_integral_error = 0.0;
+float Z_axis_integral_error = 0.0;
+float X_axis_differential_error = 0.0;
+float Z_axis_differential_error = 0.0;
+
+#define TIMESTEP 5 // timestep in multiples of 2.048 ms
+float delta_t = 0.01024; // in seconds
+
+float responseX = 0.0;
+float responseZ = 0.0;
+
 void setup() {
   #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     Wire.begin();
@@ -152,9 +177,26 @@ void loop() {
   //          INTA
   // GY-86    DRDY
 
-    
+  displacementX = -2.0 * q.w * q.y + 2.0 * q.x * q.z;
+  displacementZ = q.w * q.w - q.x * q.x - q.y * q.y - q.z * q.z;
 
-  // CALCULATING ANGLES 
+  X_axis_integral_error += displacementX * delta_t;
+  X_axis_differential_error = (displacementX - oldDisplacementX) / delta_t;
+
+  Z_axis_integral_error += displacementZ * delta_t;
+  Z_axis_differential_error = (displacementZ - oldDisplacementZ) / delta_t;
+
+  responseX = K_X_mechanic * (K_P * displacementX + K_I * X_axis_integral_error + K_D * X_axis_differential_error);
+  responseZ = K_Z_mechanic * (K_P * displacementZ + K_I * Z_axis_integral_error + K_D * Z_axis_differential_error);
+
+
+
+  oldDisplacementX = displacementX;
+  oldDisplacementZ = displacementZ;  
+
+  // CALCULATING RESPONSE FROM QUATERNIONS 0.3 milliseconds 
+
+  // OUTPUT DURATION
 
   cycles++;
   if (cycles == 128) {

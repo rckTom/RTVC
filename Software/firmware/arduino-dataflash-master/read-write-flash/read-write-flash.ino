@@ -45,50 +45,52 @@ void setup()
   Serial.println(DF_45DB321_PAGESIZE);
 
   // Write "Hello world" to buffer 1.
-  dataflash.bufferWrite(1, 0);
-  for(int i=0; dummyMessage[i] != '\0'; i++)
-  {
-    SPI.transfer(dummyMessage[i]);
-  }
+  // dataflash.bufferWrite(1, 0);
+  //  for(int i=0; dummyMessage[i] != '\0'; i++)
+  //  {
+  //    SPI.transfer(dummyMessage[i]);
+  //  }
 
   // Transfer buffer 1 to page 7.
-  dataflash.bufferToPage(1, 7);
+//  dataflash.bufferToPage(1, 7);
 
   // Read page 5.
-  dataflash.pageRead(5, 0);
-  for(int i=0; i<DF_45DB321_PAGESIZE; i++)
-  {
-    uint8_t data = SPI.transfer(0xff);
-  }
+//  dataflash.pageRead(5, 0);
+//  for(int i=0; i<DF_45DB321_PAGESIZE; i++)
+//  {
+//    uint8_t data = SPI.transfer(0xff);
+//  }
 
-  SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));
+  SPI.beginTransaction(SPISettings(8000000, MSBFIRST, SPI_MODE0));
+  // SPI.begin();
 //  uint8_t buffer256[256];
 //  for(int i = 0; i <= 255; i++) {
 //    buffer256[i] = i;
 //  }
+  dataflash.bufferWrite(1, 0);
   long start = micros();
-  dataflash.bufferWrite(0, 0);
-  for(int i = 0; i <= 255; i++) {
+  for(int i = 0; i < 255; i++) {
     SPI.transfer(i);
   }
   // SPI.transfer(buffer256, 256);
   long afterBuffer = micros();
-  dataflash.bufferToPage(0, 1);
+  dataflash.bufferToPage(1, 2);
   long afterToPage = micros();
   SPI.endTransaction();
+  // SPI.end();
 
   Serial.print("Writing 256 values to buffer: ");
   Serial.println(afterBuffer - start);
   Serial.print("Writing buffer to page: ");
   Serial.println(afterToPage - afterBuffer);
 
-//  dataflash.pageToBuffer(1, 0);
-//  dataflash.bufferRead(0, 0);
-//  for(int i = 0; i <= 300; i++) {
-//    uint8_t data = SPI.transfer(0xff);
-//    Serial.print(data);
-//    Serial.print(" ");
-//  }
+  dataflash.pageToBuffer(2, 1);
+  dataflash.bufferRead(1, 0);
+  for(int i = 0; i < 300; i++) {
+    uint8_t data = SPI.transfer(0xff);
+    Serial.print(data);
+    Serial.print(" ");
+  }
 }
 
 void loop()
