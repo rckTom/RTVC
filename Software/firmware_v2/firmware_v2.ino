@@ -8,6 +8,17 @@
 #include "DataFlash.h"
 #include "MS5611.h"
 
+#define ON_RAMP 0 // constants for states of state machine
+#define IN_FLIGHT 1
+#define RECOVERY 2
+
+int currentState = 0;
+
+// variables for handling interrupts
+bool active = false; // only count if true
+bool intr = false; // set to true by interrupt, act on by loop()
+int ovf_ct = 0; // keep track of how often interrupt overflowed
+
 MPU6050 mpu;
 
 #define INTERRUPT_PIN 2  // use pin 2 on Arduino Uno & most boards
@@ -64,6 +75,28 @@ float delta_t = 0.01024; // in seconds
 float responseX = 0.0;
 float responseZ = 0.0;
 
+#define SIZE_OF_STATE 36
+struct State { // total size 36 bytes
+  long p;
+  float qw;
+  float qx;
+  float qy;
+  float qz;
+  float dx;
+  float dz;
+  float ux;
+  float uz;
+};
+State state;
+byte* pState = (byte*) &state;
+
+int currentCycle = 0;
+int currentPage = 0;
+int currentBuffer = 1;
+#define CYCLES_PER_PAGE 14 // floor(528 / 36)
+
+long flightStart;
+
 void setup() {
   #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     Wire.begin();
@@ -103,15 +136,29 @@ void setup() {
     Serial.print(devStatus);
     Serial.println(F(")"));
   }
+
+  SPI.begin();
+  dataflash.setup(csPin, resetPin, wpPin);
+  dataflash.begin();
+  SPI.end();
   
   ms5611.begin(MS5611_ULTRA_LOW_POWER);
   referencePressure = ms5611.readPressureAtConstantTemperature();
 
-  cycles = 0;
-  Serial.println(micros());
+  currentState = IN_FLIGHT;
+  flightStart = millis();
+  Serial.print("Flight started at "); Serial.println(flightStart);
+
+  // setup Timer2 for interrupts
+  setupTimer2();
+  active = true;
 }
 
-void loop() {
+void on_ramp() {
+  intr = false;
+}
+
+void in_flight() {
 
   // GET MPU DATA
   
@@ -142,7 +189,6 @@ void loop() {
   if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
     // reset so we can continue cleanly
     mpu.resetFIFO();
-    Serial.println(F("FIFO overflow!"));
 
   // otherwise, check for DMP data ready interrupt (this should happen frequently)
   } else if (mpuIntStatus & 0x02) {
@@ -177,8 +223,8 @@ void loop() {
   //          INTA
   // GY-86    DRDY
 
-  displacementX = -2.0 * q.w * q.y + 2.0 * q.x * q.z;
-  displacementZ = q.w * q.w - q.x * q.x - q.y * q.y - q.z * q.z;
+  displacementX = 2.0 * q.w * q.z + 2.0 * q.x * q.y;
+  displacementZ = -2.0 * q.w * q.x + 2.0 * q.y * q.z;
 
   X_axis_integral_error += displacementX * delta_t;
   X_axis_differential_error = (displacementX - oldDisplacementX) / delta_t;
@@ -189,18 +235,115 @@ void loop() {
   responseX = K_X_mechanic * (K_P * displacementX + K_I * X_axis_integral_error + K_D * X_axis_differential_error);
   responseZ = K_Z_mechanic * (K_P * displacementZ + K_I * Z_axis_integral_error + K_D * Z_axis_differential_error);
 
-
-
   oldDisplacementX = displacementX;
   oldDisplacementZ = displacementZ;  
 
   // CALCULATING RESPONSE FROM QUATERNIONS 0.3 milliseconds 
 
-  // OUTPUT DURATION
+  state.p = currentPressure;
+  state.qw = q.w;
+  state.qx = q.x;
+  state.qy = q.y;
+  state.qz = q.z;
+  state.dx = displacementX;
+  state.dz = displacementZ;
+  state.ux = responseX;
+  state.uz = responseZ;
 
-  cycles++;
-  if (cycles == 128) {
-    Serial.println(micros());
-    cycles = 0;
+  pState = (byte*) &state;
+  SPI.begin();
+  dataflash.bufferWrite(currentBuffer, currentCycle * SIZE_OF_STATE);
+  for(int i = 0; i < SIZE_OF_STATE; i++) {
+    SPI.transfer(*pState++);
+  }
+  dataflash.bufferToPage(currentBuffer, currentPage);
+  SPI.end();
+
+  currentCycle = ++currentCycle % CYCLES_PER_PAGE;
+  if(currentCycle == 0) {
+    currentPage++;
+  }
+
+  if((millis() - flightStart) > 5000) {
+    currentState = RECOVERY;
+  }
+
+  // SAVE STATE TO FLASH 0.3 milliseconds
+
+  intr = false;
+}
+
+void recovery() {
+  active = false;
+  intr = false;
+
+  currentCycle = 0;
+  currentPage = 0;
+
+  State readState;
+  byte* pReadState = (byte*) &readState;
+
+  for(int i = 0; i < 500; i++) {
+
+    SPI.begin();
+    pReadState = (byte*) &readState;
+    dataflash.pageToBuffer(currentPage, 1);
+    dataflash.bufferRead(1, currentCycle * SIZE_OF_STATE);
+    for(int j = 0; j < SIZE_OF_STATE; j++) {
+      uint8_t data = SPI.transfer(0xff);
+      Serial.print(data); Serial.print(" ");
+      *pReadState = data;
+      pReadState++;
+    }
+    SPI.end();
+
+    Serial.print(readState.qw); Serial.print(" ");
+    Serial.print(readState.qx); Serial.print(" ");
+    Serial.print(readState.qy); Serial.print(" ");
+    Serial.print(readState.qz); Serial.print(" ");
+    Serial.print(readState.dx); Serial.print(" ");
+    Serial.print(readState.dz); Serial.print(" ");
+    Serial.print(readState.ux); Serial.print(" ");
+    Serial.println(readState.uz);
+
+    currentCycle = ++currentCycle % CYCLES_PER_PAGE;
+    if(currentCycle == 0) {
+      currentPage++;
+    }
+  }
+
+  SPI.end();
+  
+}
+
+void loop() {
+  if(intr) { 
+    switch(currentState) {
+      case ON_RAMP: on_ramp(); break;
+      case IN_FLIGHT: in_flight(); break;
+      case RECOVERY: recovery(); break;
+    } 
+  }
+}
+
+void setupTimer2()
+{
+  noInterrupts();
+  
+  TCCR2A = 0;
+  TCCR2B = 0;
+
+  TCCR2B |= 0x05; // prescale 128
+  TIMSK2 |= 0x01; // overflow interrupt enable
+
+  interrupts();
+}
+
+ISR(TIMER2_OVF_vect)
+{
+  if(active) { ovf_ct++; };
+  if(ovf_ct==TIMESTEP) { 
+    intr = true;
+    ovf_ct = 0;
   }
 }
