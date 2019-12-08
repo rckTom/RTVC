@@ -1,0 +1,207 @@
+#include <Servo_dig.h>
+#include <GY80.h>
+
+// define constants
+#define Servo_X_pin 5
+#define Servo_Y_pin 6
+
+#define Ralt 0 // DRAGONS
+#define Rrot 0 // DRAGONS
+#define Qalt 0 // DRAGONS
+#define Qrot 0 // DRAGONS
+
+#define TIMESTEP 5 // timestep in multiples of 2.048 ms
+
+#define Gyro_addr 0x69 // I2C address of the L3G4200D
+#define Gyro_X_reg 0x28 // register containing LSB for X axis gyro rate
+#define Gyro_Y_reg 0x2A // ... for Y axis
+#define Gyro_Z_reg 0x2C // ... for Z axis
+#define Gyro_ctrl_reg1 0x20
+#define Gyro_ctrl_reg2 0x21
+#define Gyro_ctrl_reg3 0x22
+#define Gyro_ctrl_reg4 0x23
+#define Gyro_ctrl_reg5 0x24
+
+#define Accel_addr 0x53 // I2C address of the ADXL345
+#define Accel_X_reg 0x32 // register containing LSB for X axis acceleration
+#define Accel_Y_reg 0x34 // ... for Y axis
+#define Accel_Z_reg 0x36 // ... for Z axis
+#define Accel_Power_reg 0x2D // register for power control
+#define Accel_Data_reg 0x31 // register for range setting
+
+#define Baro_addr 0x77 // I2C address of the BMP085
+#define Baro_P_reg 0xDRAGONS // register containing LSB for pressure
+#define Baro_Ctrl_reg 0xF4 // register for measurement
+#define Baro_zero_oversample 0x34 // constant to measure pressure with zero oversampling
+
+// objects for servos
+Servo_dig servo_x, servo_y;
+
+// state variables
+int h, v, a;
+int gamma, gammadot, gammaddot;
+int phi, phidot;
+
+// variables for handling interrupts
+bool active = false; // only count if true
+bool intr = false; // set to true by interrupt, act on by loop()
+int ovf_ct = 0; // keep track of how often interrupt overflowed
+
+void setup() {
+  // attach two servos for x and y axis
+  servo_x.attach(Servo_X_pin, 900, 2100);
+  servo_y.attach(Servo_Y_pin, 900, 2100);
+
+  Wire.begin();
+  // attach sensors over I2C
+  setup_Gyro(250);
+  setup_Accel(4);
+  setup_Baro();
+
+  // initialize state
+  h = 0;
+  v = 0;
+  a = 0;
+  gamma = 0;
+  gammadot = 0;
+  gammaddot = 0;
+  phi = 0;
+  phidot = 0;
+
+  // setup Timer2 for interrupts
+  setupTimer2();
+  active = true;
+}
+
+
+
+void loop() {
+  if(intr) { 
+    // DRAGONS
+ }
+}
+
+void setupTimer2()
+{
+  noInterrupts();
+  
+  TCCR2A = 0;
+  TCCR2B = 0;
+
+  TCCR2B |= 0x05; // prescale 128
+  TIMSK2 |= 0x01; // overflow interrupt enable
+
+  interrupts();
+}
+
+ISR(TIMER2_OVF_vect)
+{
+  if(active) { ovf_ct++; };
+  if(ovf_ct==TIMESTEP) { 
+    intr = true;
+    ovf_ct = 0;
+  }
+}
+
+int read_gyro_rate(byte axis) {
+  int v;
+  byte MSB = readRegister(Gyro_addr, axis+1);
+  byte LSB = readRegister(Gyro_addr, axis);
+  v = ((MSB << 8) | LSB);
+  return v;
+}
+
+// this might be optimized by reading all six bytes at once!
+int read_accel(byte axis) {
+  int v;
+  byte MSB = readRegister(Accel_addr, axis+1);
+  byte LSB = readRegister(Accel_addr, axis);
+  v = ((MSB << 8) | LSB);
+  return v;
+}
+
+int read_press() {
+  int v;
+  byte MSB = readRegister(Baro_addr,
+}
+
+void setup_Gyro(int scale) {
+  //From  Jim Lindblom of Sparkfun's code
+
+  // Enable x, y, z and turn off power down:
+  writeRegister(Gyro_addr, Gyro_ctrl_reg1, 0b11001111);
+
+  // If you'd like to adjust/use the HPF, you can edit the line below to configure CTRL_REG2:
+  writeRegister(Gyro_addr, Gyro_ctrl_reg2, 0b00000000);
+
+  // Configure CTRL_REG3 to generate data ready interrupt on INT2
+  // No interrupts used on INT1, if you'd like to configure INT1
+  // or INT2 otherwise, consult the datasheet:
+  writeRegister(Gyro_addr, Gyro_ctrl_reg3, 0b00001000);
+
+  // CTRL_REG4 controls the full-scale range, among other things:
+  if(scale == 250) {
+    writeRegister(Gyro_addr, Gyro_ctrl_reg4, 0b00000000);
+  } else if(scale == 500) {
+    writeRegister(Gyro_addr, Gyro_ctrl_reg4, 0b00010000);
+  } else {
+    writeRegister(Gyro_addr, Gyro_ctrl_reg4, 0b00110000);
+  }
+
+  // CTRL_REG5 controls high-pass filtering of outputs, use it
+  // if you'd like:
+  writeRegister(Gyro_addr, Gyro_ctrl_reg5, 0b00000000);
+}
+
+void setup_Accel(byte range) {
+  writeRegister(Accel_addr, Accel_Power_reg, 0);
+  writeRegister(Accel_addr, Accel_Power_reg, 16);
+  writeRegister(Accel_addr, Accel_Power_reg, 8);
+
+  byte _s;
+  byte _b;
+  
+  switch (range) {
+    case 2:  
+      _s = 0b00000000; 
+      break;
+    case 4:  
+      _s = 0b00000001; 
+      break;
+    case 8:  
+      _s = 0b00000010; 
+      break;
+    case 16: 
+      _s = 0b00000011; 
+      break;
+    default: 
+      _s = 0b00000000;
+  }
+  _b = readRegister(Accel_addr, Accel_Data_reg);
+  _s |= (_b & 0b11101100);
+  writeRegister(Accel_addr, Accel_Data_reg, _s);
+}
+
+void setup_Baro() {
+  writeRegister(Baro_addr, Baro_Ctrl_reg, Baro_zero_oversample);
+}
+
+void writeRegister(int deviceAddress, byte address, byte val) {
+  Wire.beginTransmission(deviceAddress); // start transmission to device 
+  Wire.write(address);       // send register address
+  Wire.write(val);         // send value to write
+  Wire.endTransmission();     // end transmission
+}
+
+int readRegister(int deviceAddress, byte address) {
+  int v;
+  Wire.beginTransmission(deviceAddress);
+  Wire.write(address); // register to read
+  Wire.endTransmission();
+  Wire.requestFrom(deviceAddress, 1); // read a byte
+  while(!Wire.available()) {
+    // waiting
+  }
+  v = Wire.read();
+  return v;
+}

@@ -1,0 +1,8 @@
+I just closed the Excel spreadsheet in which I had created a flight simulation to obtain "measurements" now saved in z.csv and z_alti_accel.csv
+
+thrust F = 9 N
+burn time t_b = 1.5 s
+air density rho = 1.225 kg/m^3
+rocket frontal surface A = 0.00196 m^2
+rocket mass m = 0.2 kg
+coefficient of drag c_D = 0.4
